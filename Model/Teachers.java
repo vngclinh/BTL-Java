@@ -13,8 +13,8 @@ public class Teachers extends Person {
 
     }
 
-    public Teachers(String idGV, String nameGV, String subjectGV, String dobGV, String emailGV) {
-        super(idGV, nameGV, dobGV, emailGV);
+    public Teachers(String idGV, String nameGV, String dobGV, String subjectGV) {
+        super(idGV, nameGV, dobGV);
         this.subjectGV = subjectGV;
 
     }

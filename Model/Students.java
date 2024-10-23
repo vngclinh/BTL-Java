@@ -7,8 +7,8 @@ public class Students extends Person {
     static Scanner in = new Scanner(System.in);
     private GPA gpa;
 
-    public Students(String id, String name, String dob, String email, GPA gpa) {
-        super(id, name, dob, email);
+    public Students(String id, String name, String dob, GPA gpa) {
+        super(id, name, dob);
         this.gpa = gpa;
     }
 

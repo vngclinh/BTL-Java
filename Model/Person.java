@@ -8,18 +8,18 @@ public class Person {
 
     private String id;
     private String name;
+    private String dob;
+    private String email;
 
     public Person() {
     }
 
-    public Person(String id, String name, String dob, String email) {
+    public Person(String id, String name, String dob) {
         this.id = id;
         this.setName(name);
-        this.dob = dob;
-        this.email = email;
+        this.setDob(dob);
+        this.email = generateEmail();
     }
-    private String dob;
-    private String email;
 
     public String getId() {
         return this.id;
@@ -42,7 +42,7 @@ public class Person {
     }
 
     public void setDob(String dob) {
-        this.dob = dob;
+        this.dob = formatDate(dob);
     }
 
     public String getEmail() {
