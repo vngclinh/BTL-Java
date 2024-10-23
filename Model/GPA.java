@@ -1,10 +1,7 @@
 package Model;
 
-import java.util.Scanner;
-
 public class GPA {
 
-    static Scanner in = new Scanner(System.in);
     private String subject;
     private float atend_point;
     private float theoretical_point;

@@ -1,11 +1,9 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Teachers extends Person {
 
-    static Scanner in = new Scanner(System.in);
     private String subjectGV;
     private ArrayList<Students> studentList = new ArrayList<>();
 
