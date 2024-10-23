@@ -11,25 +11,25 @@ import java.util.ArrayList;
  * @author Administrator
  */
 public class Teachers {
-    private String id;
+    private String idTea;
     private String name;
     private String subject;
     private String email;
     private ArrayList<Students> studentList = new ArrayList<>();
 
     public Teachers(String id, String name, String subject, String email) {
-        this.id = id;
+        this.idTea = id;
         this.name = name;
         this.subject = subject;
         this.email = email;
     }
 
     public String getId() {
-        return id;
+        return idTea;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.idTea = id;
     }
 
     public String getName() {

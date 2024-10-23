@@ -9,25 +9,26 @@ package quanlysinhvien;
  * @author Administrator
  */
 public class Students {
-    private String id;
+    private String idStu;
     private String name;
     private String DoB;
     private String email;
     private GPA gpa;
     
-    public Students(String id, String name, String DoB, String email) {
-        this.id = id;
+    public Students(String id, String name, String DoB, String email, GPA gpa) {
+        this.idStu = id;
         this.name = name;
         this.DoB = DoB;
         this.email = email;
+        this.gpa = gpa;
     }
 
     public String getId() {
-        return id;
+        return idStu;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.idStu = id;
     }
 
     public String getName() {
@@ -64,7 +65,7 @@ public class Students {
 
     @Override
     public String toString() {
-        return id + " " + name + " " + DoB + " " + email + " " + gpa.getDetails();
+        return idStu + " " + name + " " + DoB + " " + email + " " + gpa.getDetails();
     }
   
 }

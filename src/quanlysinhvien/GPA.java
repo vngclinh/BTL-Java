@@ -71,7 +71,7 @@ public class GPA {
     }
     
     public String getDetails() {
-        return subject + " " + atend_point + " " + theoretical_point + " " + practice_point + " " + final_grade + " " +averageScore(); //To change body of generated methods, choose Tools | Templates.
+        return subject + " " + atend_point + " " + theoretical_point + " " + practice_point + " " + final_grade + " " +averageScore(); 
     }
     
     public float averageScore() {
