@@ -17,18 +17,14 @@ public class UniPersonnel {
     private String name;
     private String dob;
     private String emailAddress;
-    private String username;
-    private String password;
-    private String userRole; // "STUDENT" hoặc "TEACHER"
+    private Users userAccount; // Thông tin tài khoản
 
     public UniPersonnel(String uid, String name, String dob, String userRole) {
         this.uid = uid;
         this.name = setName(name); // Đảm bảo name được khởi tạo trước
         this.dob = setDob(dob);
-        this.username = uid;
-        this.password = uid;
-        this.userRole = userRole.toUpperCase(); // Chuẩn hóa vai trò
         this.emailAddress = generateEmail(); // Gọi sau khi name được khởi tạo
+        this.userAccount = new Users(uid, uid, userRole.toUpperCase()); // Tạo tài khoản
     }
 
     private String generateEmail() {
@@ -59,13 +55,13 @@ public class UniPersonnel {
         return emailAddress;
     }
 
-    public String getUserRole() {
-        return userRole;
+    public Users getUserAccount() {
+        return userAccount;
     }
 
     @Override
     public String toString() {
-        return "UID: " + uid + ", Name: " + name + ", Role: " + userRole + ", Email: " + emailAddress;
+        return "UID: " + uid + ", Name: " + name + ", Role: " + userAccount.getRole() + ", Email: " + emailAddress;
     }
 
     private String setName(String name) {
@@ -81,24 +77,19 @@ public class UniPersonnel {
 
     private String setDob(String dob) {
         dob = dob.trim();
-        //Cac dinh dang dau vao
         String[] formats = {
             "dd/MM/yyyy", "d/M/yyyy", "dd-MM-yyyy", "d-M-yyyy",
             "yyyy/MM/dd", "yyyy-MM-dd", "MM/dd/yyyy", "M/d/yyyy"
         };
-
-        // Định dạng đầu ra chuẩn
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-        // Duyệt qua các định dạng đầu vào để tìm định dạng phù hợp
         for (String format : formats) {
             try {
                 SimpleDateFormat inputFormat = new SimpleDateFormat(format);
-                inputFormat.setLenient(false);  // Không cho phép lỗi ngày tháng
-                Date date = inputFormat.parse(dob);  // Thử phân tích chuỗi ngày tháng
-                return outputFormat.format(date);  // Trả về ngày tháng chuẩn
+                inputFormat.setLenient(false);
+                Date date = inputFormat.parse(dob);
+                return outputFormat.format(date);
             } catch (ParseException e) {
-                // Nếu gặp lỗi, thử định dạng tiếp theo
+                // Ignored
             }
         }
         return dob;

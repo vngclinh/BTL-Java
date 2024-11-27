@@ -15,13 +15,13 @@ public class MonHoc {
     private String id;
     private String name;
     private int credits;
-    private List<LopHocPhan> lopHocPhans; // Danh sách lớp học phần
+    private List<String> lopHocPhanIds; // Danh sách lớp học phần
 
     public MonHoc(String id, String name, int credits) {
         this.id = id;
         this.name = name;
         this.credits = credits;
-        this.lopHocPhans = new ArrayList<>();
+        this.lopHocPhanIds = new ArrayList<>();
     }
 
     public String getId() {
@@ -36,13 +36,13 @@ public class MonHoc {
         return credits;
     }
 
-    public List<LopHocPhan> getLopHocPhans() {
-        return lopHocPhans;
+    public List<String> getLopHocPhanIds() {
+        return lopHocPhanIds;
     }
 
-    public void addLopHocPhan(LopHocPhan lopHocPhan) {
-        if (!lopHocPhans.contains(lopHocPhan)) {
-            lopHocPhans.add(lopHocPhan);
+    public void addLopHocPhan(String lopHocPhanId) {
+        if (!lopHocPhanIds.contains(lopHocPhanId)) {
+            lopHocPhanIds.add(lopHocPhanId);
         }
     }
 

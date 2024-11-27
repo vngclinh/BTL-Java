@@ -8,38 +8,40 @@ package quanlysinhvien;
  *
  * @author Administrator
  */
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class Student extends UniPersonnel {
-    private Map<String, LopHocPhan> registeredClasses = new HashMap<>();
+    private Map<String, LopHocPhan> registeredClasses = new HashMap<>(); // Map<classId, LopHocPhan>
 
     public Student(String uid, String name, String dob) {
-        super(uid, name, dob,"STUDENT");
+        super(uid, name, dob, "STUDENT");
     }
 
-    public void registeredClasses(LopHocPhan lopHocPhan) {
-        registeredClasses.put(lopHocPhan.getId(), lopHocPhan);
+    public void registerClassSection(String courseId, LopHocPhan lopHocPhan) {
+        if (!registeredClasses.containsKey(lopHocPhan.getId())) {
+            registeredClasses.put(lopHocPhan.getId(), lopHocPhan);
+            lopHocPhan.addStudent(this);
+            System.out.println("Student " + this.getUid() + " registered for class: " + lopHocPhan.getId());
+        } else {
+            System.out.println("You are already registered for this class.");
+        }
     }
 
     public Map<String, LopHocPhan> getRegisteredClasses() {
         return registeredClasses;
     }
 
-
     public String calculateGPA10(Map<String, MonHoc> courses) {
         double totalPoints = 0;
         int totalCredits = 0;
 
-        System.out.println("Calculating GPA for student: " + this.getUid());
         for (LopHocPhan lopHocPhan : registeredClasses.values()) {
-            MonHoc course = courses.get(lopHocPhan.getCourseId());
+            String courseId = lopHocPhan.getCourseId();
+            MonHoc course = courses.get(courseId);
 
             if (course != null) {
                 int credits = course.getCredits();
                 Diem diem = lopHocPhan.getStudentGrades().get(this);
-
-                System.out.println("Class: " + lopHocPhan.getId() + ", Course: " + course.getName() + ", Credits: " + credits + ", Grade: " + diem);
 
                 if (diem != null) {
                     double finalScore = diem.tinhDiemTongKet();
@@ -48,147 +50,53 @@ public class Student extends UniPersonnel {
                 }
             }
         }
-        
-        DecimalFormat df = new DecimalFormat("0.0");
+
         double gpa10 = totalCredits > 0 ? totalPoints / totalCredits : 0;
-        System.out.println("GPA (10-scale): " + df.format(gpa10));
-        return df.format(gpa10);
+        return String.format("%.2f", gpa10);
     }
 
- 
     private double convertToScale4(double gpa10) {
-        if (gpa10 >= 9.0) {
-            return 4.0; // A+
-        } else if (gpa10 >= 8.5) {
-            return 3.7; // A
-        } else if (gpa10 >= 8.0) {
-            return 3.5; // B+
-        } else if (gpa10 >= 7.0) {
-            return 3.0; // B
-        } else if (gpa10 >= 6.5) {
-            return 2.5; // C+
-        } else if (gpa10 >= 5.5) {
-            return 2.0; // C
-        } else if (gpa10 >= 5.0) {
-            return 1.5; // D+
-        } else if (gpa10 >= 4.0) {
-            return 1.0; // D
-        } else {
-            return 0.0; // F
-        }
+        if (gpa10 >= 9.0) return 4.0;
+        if (gpa10 >= 8.5) return 3.7;
+        if (gpa10 >= 8.0) return 3.5;
+        if (gpa10 >= 7.0) return 3.0;
+        if (gpa10 >= 6.5) return 2.5;
+        if (gpa10 >= 5.5) return 2.0;
+        if (gpa10 >= 5.0) return 1.5;
+        if (gpa10 >= 4.0) return 1.0;
+        return 0.0;
     }
-    
+
     public String calculateGPA4(Map<String, MonHoc> courses) {
-        double totalPoints = 0;
-        int totalCredits = 0;
-        
-        System.out.println("Calculating GPA for student: " + this.getUid());
-        for (LopHocPhan lopHocPhan : registeredClasses.values()) {
-            MonHoc course = courses.get(lopHocPhan.getCourseId());
-
-            if (course != null) {
-                int credits = course.getCredits();
-                Diem diem = lopHocPhan.getStudentGrades().get(this);
-                
-                System.out.println("Class: " + lopHocPhan.getId() + ", Course: " + course.getName() + ", Credits: " + credits + ", Grade: " + diem);
-
-
-                if (diem != null) {
-                    double finalScore = diem.tinhDiemTongKet();
-                    totalPoints += finalScore * credits;
-                    totalCredits += credits;
-                }
-            }
-        }
-        
-        DecimalFormat df = new DecimalFormat("0.0");
-        double gpa10 = totalCredits > 0 ? totalPoints / totalCredits : 0;
-        String gpa4 = df.format(convertToScale4(gpa10));
-        System.out.println("GPA (4-scale): " + gpa4);
-        return gpa4;
+        String gpa10 = calculateGPA10(courses);
+        double gpa10Value = Double.parseDouble(gpa10);
+        double gpa4 = convertToScale4(gpa10Value);
+        return String.format("%.2f", gpa4);
     }
-    
+
     private String convertToLetterGPA(double gpa10) {
-        if (gpa10 >= 9.0) {
-            return  "A+";
-        } else if (gpa10 >= 8.5) {
-            return "A";
-        } else if (gpa10 >= 8.0) {
-            return "B+";
-        } else if (gpa10 >= 7.0) {
-            return "B";
-        } else if (gpa10 >= 6.5) {
-            return "C+";
-        } else if (gpa10 >= 5.5) {
-            return "C";
-        } else if (gpa10 >= 5.0) {
-            return "D+";
-        } else if (gpa10 >= 4.0) {
-            return "D";
-        } else {
-            return "F";
-        }
+        if (gpa10 >= 9.0) return "A+";
+        if (gpa10 >= 8.5) return "A";
+        if (gpa10 >= 8.0) return "B+";
+        if (gpa10 >= 7.0) return "B";
+        if (gpa10 >= 6.5) return "C+";
+        if (gpa10 >= 5.5) return "C";
+        if (gpa10 >= 5.0) return "D+";
+        if (gpa10 >= 4.0) return "D";
+        return "F";
     }
-    
+
     public String calculateGPALetter(Map<String, MonHoc> courses) {
-        double totalPoints = 0;
-        int totalCredits = 0;
-        
-        System.out.println("Calculating GPA for student: " + this.getUid());
-        for (LopHocPhan lopHocPhan : registeredClasses.values()) {
-            MonHoc course = courses.get(lopHocPhan.getCourseId());
-
-            if (course != null) {
-                int credits = course.getCredits();
-                Diem diem = lopHocPhan.getStudentGrades().get(this);
-                
-                System.out.println("Class: " + lopHocPhan.getId() + ", Course: " + course.getName() + ", Credits: " + credits + ", Grade: " + diem);
-
-
-                if (diem != null) {
-                    double finalScore = diem.tinhDiemTongKet();
-                    totalPoints += finalScore * credits;
-                    totalCredits += credits;
-                }
-            }
-        }
-        
-        double gpa10 = totalCredits > 0 ? totalPoints / totalCredits : 0;
-        String gpa = convertToLetterGPA(gpa10);
-        System.out.println("Letter grades: " + gpa);
-        return gpa;
-    }
-    
-    public void registerClassSection(MonHoc monHoc, String classId) {
-        LopHocPhan selectedClass = null;
-
-        // Find the class by ID
-        for (LopHocPhan lopHocPhan : monHoc.getLopHocPhans()) {
-            if (lopHocPhan.getId().equals(classId)) {
-                selectedClass = lopHocPhan;
-                break;
-            }
-        }
-
-        // If class found
-        if (selectedClass != null) {
-            if (!registeredClasses.containsKey(selectedClass.getId())) {
-                registeredClasses.put(selectedClass.getId(), selectedClass);
-                selectedClass.addStudent(this);
-                System.out.println("Student " + this.getUid() + " registered for class: " + selectedClass.getId());
-            } else {
-                System.out.println("You are already registered for this class.");
-            }
-        } else {
-            System.out.println("Class ID not found for the course: " + monHoc.getName());
-        }
+        String gpa10 = calculateGPA10(courses);
+        double gpa10Value = Double.parseDouble(gpa10);
+        return convertToLetterGPA(gpa10Value);
     }
 
     @Override
     public String toString() {
         return super.toString() + ", Enrolled Classes: " + registeredClasses.keySet();
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

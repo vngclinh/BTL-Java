@@ -15,24 +15,16 @@ public class LopHocPhan {
     private String courseId; // ID môn học liên kết
     private String teacherId; // ID giảng viên
     private HashMap<Student, Diem> studentlist; // Danh sách sinh viên và điểm
-    private MonHoc monHoc; // Tham chiếu tới môn học
 
-    public LopHocPhan(String id, MonHoc monHoc, String teacherId) {
+    public LopHocPhan(String id, String courseId, String teacherId) {
         this.id = id;
-        this.courseId = monHoc.getId();
+        this.courseId = courseId;
         this.teacherId = teacherId;
-        this.monHoc = monHoc;
         this.studentlist = new HashMap<>();
-        monHoc.addLopHocPhan(this); // Liên kết với môn học
     }
-
 
     public String getId() {
         return id;
-    }
-    
-    public MonHoc getMonHoc() {
-        return this.monHoc;
     }
 
     public String getCourseId() {
@@ -58,7 +50,7 @@ public class LopHocPhan {
             studentlist.put(student, diem);
             System.out.println("Updated grade for student: " + student.getUid() + " -> " + diem);
         } else {
-            System.out.println("Student not found in this class: " + student.getUid());
+            System.out.println("Student not found in this class: " + student.getUid() + ", Class ID: " + this.id);
         }
     }
 
