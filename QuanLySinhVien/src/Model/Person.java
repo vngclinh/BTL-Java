@@ -9,52 +9,18 @@ public class Person {
     private String id;
     private String name;
     private String dob;
-    private String email;
+    private String phoneNum;
 
-    public Person() {
-    }
-
-    public Person(String id, String name, String dob) {
+    public Person(String id, String name, String dob, String phoneNum) {
         this.id = id;
-        this.setName(name);
-        this.setDob(dob);
-        this.email = generateEmail();
+        this.name = setName(name);
+        this.dob = setDob(dob);
+        this.phoneNum = setPhoneNumber(phoneNum);
     }
 
-    public String getId() {
-        return this.id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = formatName(name);
-    }
-
-    public String getDob() {
-        return this.dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = formatDate(dob);
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String formatName(String n) {
-        String[] a = n.split("\\s+");
+    //Chuẩn hóa tên
+    private String setName(String name) {
+        String[] a = name.split("\\s+");
         StringBuilder sb = new StringBuilder("");
         for (String x : a) {
             sb.append(Character.toUpperCase(x.charAt(0)));
@@ -64,46 +30,52 @@ public class Person {
         return sb.toString().trim();
     }
 
-    public String formatDate(String n) {
-        n = n.trim();
-        //Cac dinh dang dau vao
+    //Chuẩn hóa ngày sinh
+    private String setDob(String dob) {
+        dob = dob.trim();
         String[] formats = {
             "dd/MM/yyyy", "d/M/yyyy", "dd-MM-yyyy", "d-M-yyyy",
             "yyyy/MM/dd", "yyyy-MM-dd", "MM/dd/yyyy", "M/d/yyyy"
         };
-
-        // Định dạng đầu ra chuẩn
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-        // Duyệt qua các định dạng đầu vào để tìm định dạng phù hợp
         for (String format : formats) {
             try {
                 SimpleDateFormat inputFormat = new SimpleDateFormat(format);
-                inputFormat.setLenient(false);  // Không cho phép lỗi ngày tháng
-                Date date = inputFormat.parse(n);  // Thử phân tích chuỗi ngày tháng
-                return outputFormat.format(date);  // Trả về ngày tháng chuẩn
+                inputFormat.setLenient(false);
+                Date date = inputFormat.parse(dob);
+                return outputFormat.format(date);
             } catch (ParseException e) {
-                // Nếu gặp lỗi, thử định dạng tiếp theo
+                // Ignored
             }
         }
-        return n;
+        return dob;
+    }
+    //Chuẩn hóa số điện thoại
+    private String setPhoneNumber(String phone){
+        if (phone.charAt(0)!='0'){
+            return "0"+phone;
+        }
+        return phone;
     }
 
-    public String generateEmail() {
-        StringBuilder sb = new StringBuilder("");
-        String[] a = this.name.split("\\s+");
-        sb.append(a[a.length - 1]);
-        for (int i = 0; i < a.length - 1; i++) {
-            sb.append(a[i].charAt(0));
-        }
-        sb.append(this.id);
-        sb.append("@ptit.edu.vn");
-        return sb.toString();
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
     }
 
     @Override
     public String toString() {
-        return this.id + " " + this.name + " " + formatDate(this.dob) + " " + generateEmail();
+        return "UID: " + id + "\nName: " + name + "\nDob: " + dob + "\nPhone number: " + phoneNum;
     }
-
 }
