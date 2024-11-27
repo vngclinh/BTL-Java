@@ -10,7 +10,7 @@ package quanlysinhvien;
  */
 import java.util.*;
 
-public class Student extends UniPersonnel {
+public class Student extends Person {
     private Map<String, LopHocPhan> registeredClasses = new HashMap<>(); // Map<classId, LopHocPhan>
 
     public Student(String uid, String name, String dob) {
@@ -21,7 +21,7 @@ public class Student extends UniPersonnel {
         if (!registeredClasses.containsKey(lopHocPhan.getId())) {
             registeredClasses.put(lopHocPhan.getId(), lopHocPhan);
             lopHocPhan.addStudent(this);
-            System.out.println("Sinh vien " + this.getUid() + " da dang ky lop: " + lopHocPhan.getId());
+            System.out.println("Sinh vien " + this.getId() + " da dang ky lop: " + lopHocPhan.getId());
         } else {
             System.out.println("Ban da dang ky lop nay roi.");
         }
@@ -44,7 +44,7 @@ public class Student extends UniPersonnel {
                 int attendedSessions = diem != null ? (int) diem.getDiemCC() : 0; // Dùng điểm CC làm số buổi chuyên cần
 
                 if (!lopHocPhan.checkAttendance(this, attendedSessions, course)) {
-                    System.out.println("Sinh vien " + this.getUid() + " da truot vi nghi qua 50% so buoi: " + course.getName());
+                    System.out.println("Sinh vien " + this.getId() + " da truot vi nghi qua 50% so buoi: " + course.getName());
                     continue;
                 }
 
@@ -108,12 +108,12 @@ public class Student extends UniPersonnel {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Student student = (Student) obj;
-        return this.getUid().equals(student.getUid());
+        return this.getId().equals(student.getId());
     }
 
     @Override
     public int hashCode() {
-        return this.getUid().hashCode();
+        return this.getId().hashCode();
     }
 }
 

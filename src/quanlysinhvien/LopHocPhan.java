@@ -35,7 +35,7 @@ public class LopHocPhan {
 
     public void addStudent(Student student) {
         if (studentlist.size() >= MAX_STUDENTS) {
-            System.out.println("Class is full. Cannot add student: " + student.getUid());
+            System.out.println("Class is full. Cannot add student: " + student.getId());
             return;
         }
 
@@ -47,7 +47,7 @@ public class LopHocPhan {
     public boolean checkAttendance(Student student, int attendedSessions, MonHoc course) {
         double attendanceRate = (double) attendedSessions / course.getTotalSessions();
         if (attendanceRate <= 0.5) {
-            System.out.println("Student " + student.getUid() + " failed due to low attendance.");
+            System.out.println("Student " + student.getId() + " failed due to low attendance.");
             return false; // Fail due to attendance
         }
         return true; // Pass attendance check
@@ -64,21 +64,21 @@ public class LopHocPhan {
     public void updateStudentGrade(Student student, Diem diem) {
         if (studentlist.containsKey(student)) {
             studentlist.put(student, diem);
-            System.out.println("Cap nhat diem cho sinh vien: " + student.getUid() + " -> " + diem);
+            System.out.println("Cap nhat diem cho sinh vien: " + student.getId() + " -> " + diem);
         } else {
-            System.out.println("Student not found in this class: " + student.getUid() + ", Class ID: " + this.id);
+            System.out.println("Student not found in this class: " + student.getId() + ", Class ID: " + this.id);
         }
     }
 
     public void printStudentList() {
 //        System.out.println("Danh sách sinh viên trong lớp " + id + ":");
         for (Student student : studentlist.keySet()) {
-            System.out.printf("ID: %s, Name: %s, Birth: %s, email: %s\n", student.getUid(), student.getName(), student.getDob(), student.getEmailAddress());
+            System.out.printf("ID: %s, Name: %s, Birth: %s, email: %s\n", student.getId(), student.getName(), student.getDob(), student.getEmailAddress());
         }
     }
     
     public void printStudentResult(Student student, Map<String, MonHoc> courses) {
-        System.out.printf("ID: %s, Name: %s\n", student.getUid(), student.getName());
+        System.out.printf("ID: %s, Name: %s\n", student.getId(), student.getName());
         System.out.println("Chi tiet khoa hoc:");
 
         for (Map.Entry<String, LopHocPhan> entry : student.getRegisteredClasses().entrySet()) {

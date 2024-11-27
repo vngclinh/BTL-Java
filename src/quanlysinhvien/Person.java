@@ -12,19 +12,19 @@ import java.util.Date;
  *
  * @author Administrator
  */
-public class UniPersonnel {
-    private String uid; // University ID (duy nhất)
+public class Person {
+    private String id; 
     private String name;
     private String dob;
     private String emailAddress;
     private Users userAccount; // Thông tin tài khoản
 
-    public UniPersonnel(String uid, String name, String dob, String userRole) {
-        this.uid = uid;
+    public Person(String id, String name, String dob, String userRole) {
+        this.id = id;
         this.name = setName(name); // Đảm bảo name được khởi tạo trước
         this.dob = setDob(dob);
         this.emailAddress = generateEmail(); // Gọi sau khi name được khởi tạo
-        this.userAccount = new Users(uid, uid, userRole.toUpperCase()); // Tạo tài khoản
+        this.userAccount = new Users(id, id, userRole.toUpperCase()); // Tạo tài khoản
     }
 
     private String generateEmail() {
@@ -34,13 +34,13 @@ public class UniPersonnel {
         for (int i = 0; i < a.length - 1; i++) {
             sb.append(a[i].charAt(0));
         }
-        sb.append(this.uid);
+        sb.append(this.id);
         sb.append("@ptit.edu.vn");
         return sb.toString();
     }
 
-    public String getUid() {
-        return uid;
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -61,7 +61,7 @@ public class UniPersonnel {
 
     @Override
     public String toString() {
-        return "UID: " + uid + ", Name: " + name + ", Role: " + userAccount.getRole() + ", Email: " + emailAddress;
+        return "UID: " + id + ", Name: " + name + ", Role: " + userAccount.getRole() + ", Email: " + emailAddress;
     }
 
     private String setName(String name) {

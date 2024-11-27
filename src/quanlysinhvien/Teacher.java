@@ -10,7 +10,7 @@ import java.util.*;
  *
  * @author Administrator
  */
-public class Teacher extends UniPersonnel {
+public class Teacher extends Person {
     private List<String> teachingCourses = new ArrayList<>(); // ID các lớp học phần đang dạy
 
     public Teacher(String uid, String name, String dob) {
