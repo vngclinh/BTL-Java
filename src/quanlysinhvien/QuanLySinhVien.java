@@ -17,19 +17,19 @@ public class QuanLySinhVien {
      */
     public static void main(String[] args) {
         // 1. Tạo các môn học
-        MonHoc java = new MonHoc("CS101", "Java Programming", 3, 30);
-        MonHoc math = new MonHoc("MATH202", "Calculus II", 4, 45);
-        MonHoc physics = new MonHoc("PHYS303", "Physics III", 3, 40);
+        Course java = new Course("CS101", "Java Programming", 3, 30);
+        Course math = new Course("MATH202", "Calculus II", 4, 45);
+        Course physics = new Course("PHYS303", "Physics III", 3, 40);
 
         // Lưu trữ các môn học vào Map
-        Map<String, MonHoc> courses = new HashMap<>();
+        Map<String, Course> courses = new HashMap<>();
         courses.put(java.getId(), java);
         courses.put(math.getId(), math);
         courses.put(physics.getId(), physics);
 
         // 2. Tạo các lớp học phần
-        LopHocPhan javaClass = new LopHocPhan("CS101-01", "CS101", "T01");
-        LopHocPhan mathClass = new LopHocPhan("MATH202-01", "MATH202", "T02");
+        Class javaClass = new Class("CS101-01", "CS101", "T01");
+        Class mathClass = new Class("MATH202-01", "MATH202", "T02");
 
         // 3. Tạo sinh viên
         Student student1 = new Student("S123", "Nguyen Van An", "15/08/2002");
@@ -48,10 +48,10 @@ public class QuanLySinhVien {
         mathClass.printStudentList();
 
         // 5. Cập nhật điểm và chuyên cần
-        javaClass.updateStudentGrade(student1, new Diem(20, 8, 7, 9)); // Điểm chuyên cần (20/30 buổi), TH, GK, CK
-        javaClass.updateStudentGrade(student2, new Diem(10, 6, 7, 8)); // Điểm chuyên cần (10/30 buổi), TH, GK, CK
+        javaClass.updateStudentGrade(student1, new Score(20, 8, 7, 9)); // Điểm chuyên cần (20/30 buổi), TH, GK, CK
+        javaClass.updateStudentGrade(student2, new Score(10, 6, 7, 8)); // Điểm chuyên cần (10/30 buổi), TH, GK, CK
 
-        mathClass.updateStudentGrade(student1, new Diem(40, 9, 8, 7)); // Điểm chuyên cần (40/45 buổi), TH, GK, CK
+        mathClass.updateStudentGrade(student1, new Score(40, 9, 8, 7)); // Điểm chuyên cần (40/45 buổi), TH, GK, CK
 
         // 6. Kiểm tra kết quả của sinh viên
         System.out.println("\nKet qua hoc tap cua sinh vien Nguyen Van An:");

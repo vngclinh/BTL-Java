@@ -8,15 +8,15 @@ package quanlysinhvien;
  *
  * @author Administrator
  */
-public class Diem {
+public class Score{
     private double diemCC; // Số buổi chuyên cần
-    private double diemTH;
-    private double diemGK;
-    private double diemCK;
+    private double diemKT; // Điểm kiểm tra
+    private double diemGK; // Điểm giữa khóa
+    private double diemCK; // Điểm cuối khóa
 
-    public Diem(double diemCC, double diemTH, double diemGK, double diemCK) {
+    public Score(double diemCC, double diemKT, double diemGK, double diemCK) {
         this.diemCC = diemCC;
-        this.diemTH = diemTH;
+        this.diemKT = diemKT;
         this.diemGK = diemGK;
         this.diemCK = diemCK;
     }
@@ -26,11 +26,11 @@ public class Diem {
     }
 
     public double tinhDiemTongKet() {
-        return diemCC * 0.1 + diemTH * 0.2 + diemGK * 0.3 + diemCK * 0.4;
+        return diemKT * 0.3 + diemGK * 0.3 + diemCK * 0.4;
     }
 
     @Override
     public String toString() {
-        return "CC=" + diemCC + ", TH=" + diemTH + ", GK=" + diemGK + ", CK=" + diemCK;
+        return "CC=" + diemCC + ", KT=" + diemKT + ", GK=" + diemGK + ", CK=" + diemCK;
     }
 }

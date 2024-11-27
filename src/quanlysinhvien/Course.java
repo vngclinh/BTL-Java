@@ -11,14 +11,14 @@ import java.util.*;
  * @author Administrator
  */
 
-public class MonHoc {
+public class Course {
     private String id;
     private String name;
     private int credits;
     private int totalSessions; // Tổng số buổi học
     private List<String> lopHocPhanIds; // Danh sách lớp học phần
 
-    public MonHoc(String id, String name, int credits, int totalSessions) {
+    public Course(String id, String name, int credits, int totalSessions) {
         this.id = id;
         this.name = name;
         this.credits = credits;

@@ -10,15 +10,15 @@ import java.util.*;
  *
  * @author Administrator
  */
-public class LopHocPhan {
+public class Class{
     private static final int MAX_STUDENTS = 20; // Giới hạn số sinh viên
 
     private String id;
     private String courseId;
     private String teacherId;
-    private HashMap<Student, Diem> studentlist;
+    private HashMap<Student, Score> studentlist;
 
-    public LopHocPhan(String id, String courseId, String teacherId) {
+    public Class(String id, String courseId, String teacherId) {
         this.id = id;
         this.courseId = courseId;
         this.teacherId = teacherId;
@@ -40,33 +40,33 @@ public class LopHocPhan {
         }
 
         if (!studentlist.containsKey(student)) {
-            studentlist.put(student, new Diem(0, 0, 0, 0)); // Khởi tạo điểm 0
+            studentlist.put(student, new Score(0, 0, 0, 0)); // Khởi tạo điểm 0
         }
     }
 
-    public boolean checkAttendance(Student student, int attendedSessions, MonHoc course) {
+    public boolean checkAttendance(Student student, int attendedSessions, Course course) {
         double attendanceRate = (double) attendedSessions / course.getTotalSessions();
         if (attendanceRate <= 0.5) {
             System.out.println("Student " + student.getId() + " failed due to low attendance.");
-            return false; // Fail due to attendance
+            return false; // Fail vì đi học không quá nửa số buổi
         }
-        return true; // Pass attendance check
+        return true; // Điểm chuyên cần đủ điều kiện
     }
 
-    public Map<Student, Diem> getStudentGrades() {
+    public Map<Student, Score> getStudentGrades() {
         return new HashMap<>(studentlist);
     }
     
-    public Diem getStudentGrade(Student student) {
+    public Score getStudentGrade(Student student) {
         return studentlist.get(student);
     }
     
-    public void updateStudentGrade(Student student, Diem diem) {
+    public void updateStudentGrade(Student student, Score diem) {
         if (studentlist.containsKey(student)) {
             studentlist.put(student, diem);
             System.out.println("Cap nhat diem cho sinh vien: " + student.getId() + " -> " + diem);
         } else {
-            System.out.println("Student not found in this class: " + student.getId() + ", Class ID: " + this.id);
+            System.out.println("Khong tim thay sinh vien: " + student.getId() + "trong lop hoc nay: " + this.id);
         }
     }
 
@@ -77,17 +77,17 @@ public class LopHocPhan {
         }
     }
     
-    public void printStudentResult(Student student, Map<String, MonHoc> courses) {
+    public void printStudentResult(Student student, Map<String, Course> courses) {
         System.out.printf("ID: %s, Name: %s\n", student.getId(), student.getName());
         System.out.println("Chi tiet khoa hoc:");
 
-        for (Map.Entry<String, LopHocPhan> entry : student.getRegisteredClasses().entrySet()) {
+        for (Map.Entry<String, Class> entry : student.getRegisteredClasses().entrySet()) {
             String courseId = entry.getKey();
-            LopHocPhan classSection = entry.getValue();
-            MonHoc monHoc = courses.get(courseId);
+            Class classSection = entry.getValue();
+            Course monHoc = courses.get(courseId);
 
             if (monHoc != null) {
-                Diem diem = classSection.getStudentGrade(student);
+                Score diem = classSection.getStudentGrade(student);
                 System.out.printf("- Course: %s (%s), Credits: %d, Grade: %s\n",
                     monHoc.getName(), courseId, monHoc.getCredits(),
                     diem != null ? diem.toString() : "No grade assigned");

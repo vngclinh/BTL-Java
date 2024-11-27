@@ -11,13 +11,13 @@ package quanlysinhvien;
 import java.util.*;
 
 public class Student extends Person {
-    private Map<String, LopHocPhan> registeredClasses = new HashMap<>(); // Map<classId, LopHocPhan>
+    private Map<String, Class> registeredClasses = new HashMap<>(); // Map<classId, LopHocPhan>
 
     public Student(String uid, String name, String dob) {
         super(uid, name, dob, "STUDENT");
     }
 
-    public void registerClassSection(String courseId, LopHocPhan lopHocPhan) {
+    public void registerClassSection(String courseId, Class lopHocPhan) {
         if (!registeredClasses.containsKey(lopHocPhan.getId())) {
             registeredClasses.put(lopHocPhan.getId(), lopHocPhan);
             lopHocPhan.addStudent(this);
@@ -27,20 +27,20 @@ public class Student extends Person {
         }
     }
 
-    public Map<String, LopHocPhan> getRegisteredClasses() {
+    public Map<String, Class> getRegisteredClasses() {
         return registeredClasses;
     }
 
-    public String calculateGPA10(Map<String, MonHoc> courses) {
+    public String calculateGPA10(Map<String, Course> courses) {
         double totalPoints = 0;
         int totalCredits = 0;
 
-        for (LopHocPhan lopHocPhan : registeredClasses.values()) {
+        for (Class lopHocPhan : registeredClasses.values()) {
             String courseId = lopHocPhan.getCourseId();
-            MonHoc course = courses.get(courseId);
+            Course course = courses.get(courseId);
 
             if (course != null) {
-                Diem diem = lopHocPhan.getStudentGrades().get(this);
+                Score diem = lopHocPhan.getStudentGrades().get(this);
                 int attendedSessions = diem != null ? (int) diem.getDiemCC() : 0; // Dùng điểm CC làm số buổi chuyên cần
 
                 if (!lopHocPhan.checkAttendance(this, attendedSessions, course)) {
@@ -73,7 +73,7 @@ public class Student extends Person {
         return 0.0;
     }
 
-    public String calculateGPA4(Map<String, MonHoc> courses) {
+    public String calculateGPA4(Map<String, Course> courses) {
         String gpa10 = calculateGPA10(courses);
         double gpa10Value = Double.parseDouble(gpa10);
         double gpa4 = convertToScale4(gpa10Value);
@@ -92,7 +92,7 @@ public class Student extends Person {
         return "F";
     }
 
-    public String calculateGPALetter(Map<String, MonHoc> courses) {
+    public String calculateGPALetter(Map<String, Course> courses) {
         String gpa10 = calculateGPA10(courses);
         double gpa10Value = Double.parseDouble(gpa10);
         return convertToLetterGPA(gpa10Value);
