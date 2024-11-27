@@ -21,9 +21,9 @@ public class Student extends UniPersonnel {
         if (!registeredClasses.containsKey(lopHocPhan.getId())) {
             registeredClasses.put(lopHocPhan.getId(), lopHocPhan);
             lopHocPhan.addStudent(this);
-            System.out.println("Student " + this.getUid() + " registered for class: " + lopHocPhan.getId());
+            System.out.println("Sinh vien " + this.getUid() + " da dang ky lop: " + lopHocPhan.getId());
         } else {
-            System.out.println("You are already registered for this class.");
+            System.out.println("Ban da dang ky lop nay roi.");
         }
     }
 
@@ -40,9 +40,15 @@ public class Student extends UniPersonnel {
             MonHoc course = courses.get(courseId);
 
             if (course != null) {
-                int credits = course.getCredits();
                 Diem diem = lopHocPhan.getStudentGrades().get(this);
+                int attendedSessions = diem != null ? (int) diem.getDiemCC() : 0; // Dùng điểm CC làm số buổi chuyên cần
 
+                if (!lopHocPhan.checkAttendance(this, attendedSessions, course)) {
+                    System.out.println("Sinh vien " + this.getUid() + " da truot vi nghi qua 50% so buoi: " + course.getName());
+                    continue;
+                }
+
+                int credits = course.getCredits();
                 if (diem != null) {
                     double finalScore = diem.tinhDiemTongKet();
                     totalPoints += finalScore * credits;
@@ -94,7 +100,7 @@ public class Student extends UniPersonnel {
 
     @Override
     public String toString() {
-        return super.toString() + ", Enrolled Classes: " + registeredClasses.keySet();
+        return super.toString() + ", Danh sach lop da dang ky: " + registeredClasses.keySet();
     }
 
     @Override

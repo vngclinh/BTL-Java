@@ -9,7 +9,7 @@ package quanlysinhvien;
  * @author Administrator
  */
 public class Diem {
-    private double diemCC;
+    private double diemCC; // Số buổi chuyên cần
     private double diemTH;
     private double diemGK;
     private double diemCK;
@@ -21,6 +21,10 @@ public class Diem {
         this.diemCK = diemCK;
     }
 
+    public double getDiemCC() {
+        return diemCC;
+    }
+
     public double tinhDiemTongKet() {
         return diemCC * 0.1 + diemTH * 0.2 + diemGK * 0.3 + diemCK * 0.4;
     }
@@ -30,4 +34,3 @@ public class Diem {
         return "CC=" + diemCC + ", TH=" + diemTH + ", GK=" + diemGK + ", CK=" + diemCK;
     }
 }
-

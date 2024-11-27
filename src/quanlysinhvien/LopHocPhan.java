@@ -11,10 +11,12 @@ import java.util.*;
  * @author Administrator
  */
 public class LopHocPhan {
-    private String id; // ID lớp học phần
-    private String courseId; // ID môn học liên kết
-    private String teacherId; // ID giảng viên
-    private HashMap<Student, Diem> studentlist; // Danh sách sinh viên và điểm
+    private static final int MAX_STUDENTS = 20; // Giới hạn số sinh viên
+
+    private String id;
+    private String courseId;
+    private String teacherId;
+    private HashMap<Student, Diem> studentlist;
 
     public LopHocPhan(String id, String courseId, String teacherId) {
         this.id = id;
@@ -32,9 +34,23 @@ public class LopHocPhan {
     }
 
     public void addStudent(Student student) {
-        if (!studentlist.containsKey(student)) {
-            studentlist.put(student, new Diem(0, 0, 0, 0));
+        if (studentlist.size() >= MAX_STUDENTS) {
+            System.out.println("Class is full. Cannot add student: " + student.getUid());
+            return;
         }
+
+        if (!studentlist.containsKey(student)) {
+            studentlist.put(student, new Diem(0, 0, 0, 0)); // Khởi tạo điểm 0
+        }
+    }
+
+    public boolean checkAttendance(Student student, int attendedSessions, MonHoc course) {
+        double attendanceRate = (double) attendedSessions / course.getTotalSessions();
+        if (attendanceRate <= 0.5) {
+            System.out.println("Student " + student.getUid() + " failed due to low attendance.");
+            return false; // Fail due to attendance
+        }
+        return true; // Pass attendance check
     }
 
     public Map<Student, Diem> getStudentGrades() {
@@ -48,13 +64,11 @@ public class LopHocPhan {
     public void updateStudentGrade(Student student, Diem diem) {
         if (studentlist.containsKey(student)) {
             studentlist.put(student, diem);
-            System.out.println("Updated grade for student: " + student.getUid() + " -> " + diem);
+            System.out.println("Cap nhat diem cho sinh vien: " + student.getUid() + " -> " + diem);
         } else {
             System.out.println("Student not found in this class: " + student.getUid() + ", Class ID: " + this.id);
         }
     }
-
-
 
     public void printStudentList() {
 //        System.out.println("Danh sách sinh viên trong lớp " + id + ":");
@@ -65,7 +79,7 @@ public class LopHocPhan {
     
     public void printStudentResult(Student student, Map<String, MonHoc> courses) {
         System.out.printf("ID: %s, Name: %s\n", student.getUid(), student.getName());
-        System.out.println("Details of courses:");
+        System.out.println("Chi tiet khoa hoc:");
 
         for (Map.Entry<String, LopHocPhan> entry : student.getRegisteredClasses().entrySet()) {
             String courseId = entry.getKey();
@@ -82,8 +96,9 @@ public class LopHocPhan {
 
         String gpa10 = student.calculateGPA10(courses);
         String gpa4 = student.calculateGPA4(courses);
-        System.out.printf("GPA (10-scale): %.2f, GPA (4-scale): %.2f\n", gpa10, gpa4);
+        System.out.printf("GPA (10-scale): %s, GPA (4-scale): %s\n", gpa10, gpa4);
     }
+
 
     
     @Override
@@ -91,6 +106,8 @@ public class LopHocPhan {
         return "Class ID: " + id + ", Course ID: " + courseId + ", Teacher ID: " + teacherId;
     }
 }
+
+
 
 
 
