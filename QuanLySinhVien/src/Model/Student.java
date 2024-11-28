@@ -8,6 +8,10 @@ public class Student extends Person implements Comparable<Student>{
     private Map<String, Score> classAttended = new TreeMap<>(); // Map<ClassID, Score>
     private static TreeMap<String, Student> allStudents = new TreeMap<>();
 
+    public Student(){
+        
+    }
+    
     public Student(String name, String dob, String phoneNum) {
         super("ST" + String.format("%03d", ++cnt), name, dob, phoneNum);
         addStudent();

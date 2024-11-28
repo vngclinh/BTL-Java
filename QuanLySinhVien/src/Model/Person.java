@@ -11,6 +11,10 @@ public class Person {
     private String dob;
     private String phoneNum;
 
+    public Person(){
+        
+    }
+    
     public Person(String id, String name, String dob, String phoneNum) {
         this.id = id;
         this.name = setName(name);

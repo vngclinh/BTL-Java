@@ -9,6 +9,9 @@ public class Teacher extends Person {
     private String email;
     private static TreeMap<String, Teacher> allTeachers = new TreeMap<>(); // Lưu trữ tất cả các giáo viên
 
+    public Teacher(){
+        
+    }
 
     public Teacher(String name, String dob, String phoneNum) {
         super("TC" + String.format("%03d", ++cnt), name, dob, phoneNum);
