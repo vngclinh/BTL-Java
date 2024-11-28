@@ -21,14 +21,23 @@ public class Class implements Comparable<Class> {
     }
 
     // Constructor khởi tạo lớp học
-    public Class(String id, String courseId, String teacherId, String startDate, String endDate) throws ParseException {
-        this.classId = id;
+    public Class(String courseId, String teacherId, String startDate, String endDate) throws ParseException {
+        this.classId = setClassId(courseId);
         this.courseId = courseId;
         this.teacherId = teacherId;
         this.studentList = new TreeSet<>();
         this.startDate = dateFormat.parse(startDate); // Định dạng ngày bắt đầu
         this.endDate = dateFormat.parse(endDate);     // Định dạng ngày kết thúc
         addClass();
+    }
+
+    //Tạo classID dựa trên courseID và số thứ tự của class đấy
+    public String setClassId(String courseID) {
+        Course course = Course.getAllCourses().get(courseID);
+        if (course != null) {
+            return course.getId() + "-" + (course.getClasses().size() + 1);
+        }
+        throw new IllegalArgumentException("Course ID not found: " + courseID);
     }
 
     // Getter cho classId
@@ -89,7 +98,7 @@ public class Class implements Comparable<Class> {
             studentList.add(stu);
         }
     }
-    
+
     // Xóa sinh viên khỏi lớp
     public void removeStudent(Student stu) {
         if (studentList.contains(stu)) {

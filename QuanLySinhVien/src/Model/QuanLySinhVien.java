@@ -51,8 +51,6 @@ public class QuanLySinhVien {
 
                 case 2 -> {
                     System.out.println("=== Add a Class ===");
-                    System.out.print("Enter class ID: ");
-                    String classId = sc.nextLine();
                     System.out.print("Enter course ID: ");
                     String courseId = sc.nextLine();
                     System.out.print("Enter teacher ID: ");
@@ -62,7 +60,7 @@ public class QuanLySinhVien {
                     System.out.print("Enter end date (dd/MM/yyyy): ");
                     String endDate = sc.nextLine();
                     if (courses.containsKey(courseId) && teachers.containsKey(teacherId)) {
-                        Class c = new Class(classId, courseId, teacherId, startDate, endDate);
+                        Class c = new Class(courseId, teacherId, startDate, endDate);
                         courses.get(courseId).addClass(c);
                         teachers.get(teacherId).assignCourse(courseId);
                         System.out.println("Class added successfully.");

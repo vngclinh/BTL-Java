@@ -2,10 +2,10 @@ package Model;
 
 import java.util.*;
 
-public class Student extends Person {
+public class Student extends Person implements Comparable<Student>{
 
     private static int cnt = 0; // Đếm số lượng học viên
-    private Map<String, Score> classAttended = new HashMap<>(); // Map<ClassID, Score>
+    private Map<String, Score> classAttended = new TreeMap<>(); // Map<ClassID, Score>
     private static TreeMap<String, Student> allStudents = new TreeMap<>();
 
     public Student(String name, String dob, String phoneNum) {
@@ -63,5 +63,9 @@ public class Student extends Person {
     @Override
     public String toString() {
         return super.toString();
+    }
+    @Override
+    public int compareTo(Student stu){
+        return this.getId().compareTo(stu.getId());
     }
 }
