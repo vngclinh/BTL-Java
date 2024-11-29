@@ -35,7 +35,7 @@ public class MenuPanel extends javax.swing.JPanel {
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
         listMenu1.addItem(new Model_Menu("grade", "Quản lý điểm", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
-        listMenu1.addItem(new Model_Menu("support (1)", "Thay đổi mật khẩu", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("support (1)", "Thêm vào lớp", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
         listMenu1.addItem(new Model_Menu("logout", "Thoát", Model_Menu.MenuType.MENU));
     }

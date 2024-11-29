@@ -89,11 +89,19 @@ public class qlkh extends javax.swing.JPanel {
             new String [] {
                 "ID khóa học", "Tên khóa học", "Số buổi học"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         table.setColumnSelectionAllowed(true);
         table.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jScrollPane2.setViewportView(table);
-        table.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        table.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -108,8 +116,8 @@ public class qlkh extends javax.swing.JPanel {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -164,16 +172,17 @@ public class qlkh extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (txtName.getText().equals("") || txtID.getText().equals("") || txtBuoi.getText().equals("")) {
             javax.swing.JOptionPane.showMessageDialog(this, "Thông tin không hợp lệ!");
+            return;
         }
         String name = txtName.getText();
         String id = txtID.getText().toUpperCase();
         int tcrBuoi = Integer.parseInt(txtBuoi.getText());
+        if(Course.getAllCourses().containsKey(id)){
+            javax.swing.JOptionPane.showMessageDialog(this, "ID Khóa học đã tồn tại!");
+            return;
+        }
         Course tcr = new Course(id, name, tcrBuoi);
-        table.addRow(new Object[]{
-            tcr.getId(),
-            tcr.getName(),
-            tcrBuoi
-        });
+        setData();
         txtName.setText("");
         txtID.setText("");
         txtBuoi.setText("");

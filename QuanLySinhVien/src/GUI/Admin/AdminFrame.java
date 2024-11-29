@@ -1,5 +1,6 @@
 package GUI.Admin;
 
+import GUI.Admin.SubPanel.dky;
 import GUI.Admin.SubPanel.qldiem;
 import GUI.Admin.SubPanel.qlgv;
 import GUI.Admin.SubPanel.qlkh;
@@ -20,6 +21,7 @@ public class AdminFrame extends javax.swing.JFrame {
     private GUI.Admin.SubPanel.qlkh QLKH;
     private GUI.Admin.SubPanel.qllh QLLH;
     private GUI.Admin.SubPanel.qldiem QLD;
+    private GUI.Admin.SubPanel.dky DK;
 
     public AdminFrame() throws ParseException {
         initComponents();
@@ -33,6 +35,7 @@ public class AdminFrame extends javax.swing.JFrame {
         QLKH = new qlkh();
         QLLH = new qllh();
         QLD = new qldiem();
+        DK = new dky();
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
@@ -49,6 +52,8 @@ public class AdminFrame extends javax.swing.JFrame {
                     setForm(QLLH);
                 } else if(index == 9){
                     setForm(QLD);
+                } else if(index == 11){
+                    setForm(DK);
                 }
             }
         });
