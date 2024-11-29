@@ -20,7 +20,7 @@ public class TableHeader extends JLabel {
     @Override
     protected void paintComponent(Graphics grphcs) {
         super.paintComponent(grphcs);
-        grphcs.setColor(new Color(230, 230, 230));
+        grphcs.setColor(new Color(51, 51, 51));
         grphcs.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
 }

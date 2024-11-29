@@ -1,6 +1,6 @@
 package GUI;
 
-import GUI.Controller.Login;
+import GUI.Controller.CheckLogin;
 import java.text.ParseException;
 
 public class Gui {
@@ -11,7 +11,7 @@ public class Gui {
     public Gui() throws ParseException {
         this.adminframe = new GUI.Admin.AdminFrame();
         this.loginframe = new GUI.Login.Login();
-        Login login = new GUI.Controller.Login(adminframe, loginframe);
+        CheckLogin login = new GUI.Controller.CheckLogin(adminframe, loginframe);
     }
     public static void main(String[] args) throws ParseException {
         try {

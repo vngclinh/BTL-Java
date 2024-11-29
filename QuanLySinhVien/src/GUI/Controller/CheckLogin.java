@@ -4,12 +4,12 @@ import GUI.Admin.AdminFrame;
 import Model.Users;
 import java.awt.event.ActionEvent;
 
-public class Login {
+public class CheckLogin {
 
     private GUI.Admin.AdminFrame adminframe;
     private GUI.Login.Login loginframe;
 
-    public Login(AdminFrame adminframe, GUI.Login.Login loginframe) {
+    public CheckLogin(AdminFrame adminframe, GUI.Login.Login loginframe) {
         this.adminframe = adminframe;
         this.loginframe = loginframe;
         addAction();
@@ -40,7 +40,7 @@ public class Login {
         }
 
         // Nếu không khớp tài khoản nào, thông báo lỗi
-        javax.swing.JOptionPane.showMessageDialog(loginframe, "Invalid username or password!");
+        javax.swing.JOptionPane.showMessageDialog(loginframe, "Sai tên tài khoản hoặc mật khẩu!");
     }
 
     public void addAction() {

@@ -1,23 +1,23 @@
 package GUI.Admin.SubPanel;
 
-import Model.Teacher;
+import Model.Student;
 
-public class qlgv extends javax.swing.JPanel {
+public class qlsv extends javax.swing.JPanel {
 
-    public qlgv() {
+    public qlsv() {
         initComponents();
         setData();
     }
 
     public void setData() {
-        for (Teacher tcr : Teacher.getAllTeachers().values()) {
-            String classIds = tcr.getTeachingCourses().isEmpty() ? "Không có lớp"
-                    : tcr.getTeachingCourses().toString().replaceAll("[\\[\\]]", "");
+        for (Student std : Student.getAllStudents().values()) {
+            String classIds = std.getClassAttended().isEmpty() ? "Không có lớp"
+                    : std.getClassAttended().keySet().toString().replaceAll("[\\[\\]]", "");
             table.addRow(new Object[]{
-                tcr.getId(),
-                tcr.getName(),
-                tcr.getDob(),
-                tcr.getPhoneNum(),
+                std.getId(),
+                std.getName(),
+                std.getDob(),
+                std.getPhoneNum(),
                 classIds
             });
 
@@ -44,7 +44,7 @@ public class qlgv extends javax.swing.JPanel {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("   Tên giáo viên    :");
+        jLabel1.setText("   Tên học viên   :");
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -73,7 +73,7 @@ public class qlgv extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(240, 204, 60));
         jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(51, 51, 51));
-        jButton2.setText("Thêm giáo viên");
+        jButton2.setText("Thêm học viên");
         jButton2.setPreferredSize(new java.awt.Dimension(160, 28));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +92,7 @@ public class qlgv extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Họ và tên", "Ngày sinh", "Số điện thoại", "Các lớp đang dạy"
+                "ID", "Họ và tên", "Ngày sinh", "Số điện thoại", "Các lớp đang học"
             }
         ));
         table.setColumnSelectionAllowed(true);
@@ -171,14 +171,14 @@ public class qlgv extends javax.swing.JPanel {
         String tcrName = txtName.getText();
         String tcrDob = txtDob.getText();
         String tcrSdt = txtSdt.getText();
-        Teacher tcr = new Teacher(tcrName, tcrDob, tcrSdt);
-        String classIds = tcr.getTeachingCourses().isEmpty() ? "Không có lớp"
-                : tcr.getTeachingCourses().toString().replaceAll("[\\[\\]]", "");
+        Student sdt = new Student(tcrName, tcrDob, tcrSdt);
+        String classIds = sdt.getClassAttended().isEmpty() ? "Không có lớp"
+                : sdt.getClassAttended().keySet().toString().replaceAll("[\\[\\]]", "");
         table.addRow(new Object[]{
-            tcr.getId(),
-            tcr.getName(),
-            tcr.getDob(),
-            tcr.getPhoneNum(),
+            sdt.getId(),
+            sdt.getName(),
+            sdt.getDob(),
+            sdt.getPhoneNum(),
             classIds
         });
         txtName.setText("");

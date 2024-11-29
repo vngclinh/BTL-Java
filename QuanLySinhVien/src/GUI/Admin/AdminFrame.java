@@ -1,6 +1,7 @@
 package GUI.Admin;
 
 import GUI.Admin.SubPanel.qlgv;
+import GUI.Admin.SubPanel.qlsv;
 import GUI.Event.EventMenuSelected;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -12,6 +13,7 @@ public class AdminFrame extends javax.swing.JFrame {
     private Form_Home home;
     private GUI.SampleDatabase sample;
     private GUI.Admin.SubPanel.qlgv QLGV;
+    private GUI.Admin.SubPanel.qlsv QLSV;
 
     public AdminFrame() throws ParseException {
         initComponents();
@@ -21,6 +23,7 @@ public class AdminFrame extends javax.swing.JFrame {
         mainPanel.setLayout(new java.awt.BorderLayout());
         sample = new GUI.SampleDatabase();
         QLGV = new qlgv();
+        QLSV = new qlsv();
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
@@ -29,6 +32,8 @@ public class AdminFrame extends javax.swing.JFrame {
                     System.exit(0);
                 } else if (index == 1) {
                     setForm(QLGV);
+                } else if (index == 3){
+                    setForm(QLSV);
                 }
             }
         });

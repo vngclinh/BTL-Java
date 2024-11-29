@@ -30,6 +30,9 @@ public class Teacher extends Person {
         }
     }
 
+    public void addTeachingClass(String classID){
+        this.teachingCourses.add(classID);
+    }
     //Tạo tài khoản email
     private String generateEmail() {
         StringBuilder sb = new StringBuilder("");

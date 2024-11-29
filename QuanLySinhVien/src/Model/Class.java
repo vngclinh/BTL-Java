@@ -33,8 +33,16 @@ public class Class implements Comparable<Class> {
         if (course != null) {
             course.addClass(this); // Thêm lớp vào danh sách lớp của khóa học
         }
+        addClassToTeacher(this.teacherId);
     }
 
+    //Thêm lớp vào danh sách lớp của giáo viên
+    public void addClassToTeacher(String teacherID){
+        if(Teacher.getAllTeachers().containsKey(teacherID)){
+            Teacher tcr = Teacher.getAllTeachers().get(teacherID);
+            tcr.addTeachingClass(this.classId);
+        }
+    }
     //Tạo classID dựa trên courseID và số thứ tự của class đấy
     public String setClassId(String courseID) {
         Course course = Course.getAllCourses().get(courseID);
