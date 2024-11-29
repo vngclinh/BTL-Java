@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -39,24 +38,10 @@ public class Table extends JTable {
                 return com;
             }
         });
-        //cài đặt độ rộng cho cột
-        SwingUtilities.invokeLater(() -> adjustColumnWidths());
     }
 
     public void addRow(Object[] row) {
         DefaultTableModel model = (DefaultTableModel) getModel();
         model.addRow(row);
-    }
-    // Phương thức điều chỉnh độ rộng cột
-
-    public void adjustColumnWidths() {
-        int totalWidth = getWidth();
-        if (getColumnModel().getColumnCount() > 0) {
-            getColumnModel().getColumn(0).setPreferredWidth(30);  // ID
-            getColumnModel().getColumn(1).setPreferredWidth(50); // Tên
-            getColumnModel().getColumn(2).setPreferredWidth(50); // Ngày sinh
-            getColumnModel().getColumn(3).setPreferredWidth(50); // SĐT
-            getColumnModel().getColumn(4).setPreferredWidth(totalWidth - 180); // Lớp đang dạy (cột cuối)
-        }
     }
 }

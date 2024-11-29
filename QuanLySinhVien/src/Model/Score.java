@@ -5,6 +5,7 @@ public class Score{
     private double homework; // Điểm trung bình các bvtn
     private double midTerm; // Điểm giữa khóa
     private double endTerm; // Điểm cuối khóa
+    private String result;
 
     public Score(){
         
@@ -14,11 +15,18 @@ public class Score{
         this.homework = homework;
         this.midTerm = midTerm;
         this.endTerm = endTerm;
+        if (calFinalScore()> 5.0){
+            this.result = "Passed";
+        }else this.result = "Failed";
+    }
+
+    public String getResult() {
+        return result;
     }
 
     public double calFinalScore() {
-        //Nghỉ quá 5 buổi sẽ trượt khóa học
-        if(this.attendance>5){
+        //Đi học ít hơn 10 buổi sẽ trượt khóa học
+        if(this.attendance<10){
             return 0;
         }
         //Lấy 2 số sau dấu phẩy
@@ -30,6 +38,7 @@ public class Score{
         return "Attendance: "+this.attendance+
                 "\nHomework Score: "+String.format("%.2f",this.homework)+
                 "\nMid-term Score: "+String.format("%.2f", this.midTerm)+
-                "\nEnd-term Score: "+String.format("%.2f",this.endTerm);
+                "\nEnd-term Score: "+String.format("%.2f",this.endTerm)+
+                "\nResult : "+this.result;
     }
 }

@@ -2,16 +2,16 @@ package Model;
 
 import java.util.*;
 
-public class Student extends Person implements Comparable<Student>{
+public class Student extends Person implements Comparable<Student> {
 
     private static int cnt = 0; // Đếm số lượng học viên
     private Map<String, Score> classAttended = new TreeMap<>(); // Map<ClassID, Score>
     private static TreeMap<String, Student> allStudents = new TreeMap<>();
 
-    public Student(){
-        
+    public Student() {
+
     }
-    
+
     public Student(String name, String dob, String phoneNum) {
         super("ST" + String.format("%03d", ++cnt), name, dob, phoneNum);
         addStudent();
@@ -29,8 +29,13 @@ public class Student extends Person implements Comparable<Student>{
 
     // Thêm các lớp học mà học viên đã tham gia
     public void addAttendedClass(Class attendedClass) {
-        if (!classAttended.containsKey(attendedClass.getClassId())) {
-            classAttended.put(attendedClass.getClassId(), new Score()); // Chưa có điểm
+        if (attendedClass == null) {
+            System.out.println("Error: attendedClass is null");
+            return;
+        }
+        if (!classAttended.containsKey(attendedClass.getClassId()) && Class.getAllClasses().containsKey(attendedClass.getClassId())) {
+            classAttended.put(attendedClass.getClassId(), new Score());
+            attendedClass.addStudentList(this);
         }
     }
 
@@ -68,8 +73,9 @@ public class Student extends Person implements Comparable<Student>{
     public String toString() {
         return super.toString();
     }
+
     @Override
-    public int compareTo(Student stu){
+    public int compareTo(Student stu) {
         return this.getId().compareTo(stu.getId());
     }
 }
