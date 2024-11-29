@@ -64,7 +64,7 @@ public class MenuItem extends javax.swing.JPanel {
         setOpaque(false);
 
         lblName.setBackground(new java.awt.Color(204, 255, 255));
-        lblName.setForeground(new java.awt.Color(51, 51, 51));
+        lblName.setForeground(new java.awt.Color(255, 255, 255));
         lblName.setText("Trang chủ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

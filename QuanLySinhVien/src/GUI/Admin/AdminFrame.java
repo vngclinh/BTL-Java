@@ -1,5 +1,6 @@
 package GUI.Admin;
 
+import GUI.Admin.SubPanel.qlgv;
 import GUI.Event.EventMenuSelected;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -10,6 +11,7 @@ public class AdminFrame extends javax.swing.JFrame {
 
     private Form_Home home;
     private GUI.SampleDatabase sample;
+    private GUI.Admin.SubPanel.qlgv QLGV;
 
     public AdminFrame() throws ParseException {
         initComponents();
@@ -18,18 +20,21 @@ public class AdminFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         mainPanel.setLayout(new java.awt.BorderLayout());
         sample = new GUI.SampleDatabase();
-        //Mặc định lúc đầu là home
-        home = new Form_Home();
-        setForm(home);
+        QLGV = new qlgv();
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
                 System.out.println(index);
-//                if (index == 0) {
-//                    setForm(home);
-//                }
+                if (index == 13) {
+                    System.exit(0);
+                } else if (index == 1) {
+                    setForm(QLGV);
+                }
             }
         });
+        //Mặc định lúc đầu là home
+        home = new Form_Home();
+        setForm(home);
     }
 
     private void setForm(JComponent com) {
@@ -52,6 +57,7 @@ public class AdminFrame extends javax.swing.JFrame {
 
         panelBorder2.setBackground(new java.awt.Color(255, 255, 255));
 
+        mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setOpaque(false);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
