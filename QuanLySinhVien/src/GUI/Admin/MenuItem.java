@@ -19,10 +19,6 @@ public class MenuItem extends javax.swing.JPanel {
         if (data.getType() == Model_Menu.MenuType.MENU) {
             lblIcon.setIcon(data.toIcon());
             lblName.setText(data.getName());
-        } else if (data.getType() == Model_Menu.MenuType.TITLE) {
-            lblIcon.setText(data.getName());
-            lblIcon.setFont(new Font("sansserif", Font.BOLD, 12));
-            lblName.setVisible(false);
         } else {
             lblName.setText(" ");
         }

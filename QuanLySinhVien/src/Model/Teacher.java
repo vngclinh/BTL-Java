@@ -4,13 +4,13 @@ import java.util.*;
 
 public class Teacher extends Person {
 
-    private static int cnt = 0;
+    private static int cnt =0;
     private TreeSet<String> teachingCourses = new TreeSet<>(); // ID các lớp học phần đang dạy
     private String email;
     private static TreeMap<String, Teacher> allTeachers = new TreeMap<>(); // Lưu trữ tất cả các giáo viên
 
-    public Teacher(){
-        
+    public Teacher() {
+
     }
 
     public Teacher(String name, String dob, String phoneNum) {
@@ -22,7 +22,7 @@ public class Teacher extends Person {
     public static TreeMap<String, Teacher> getAllTeachers() {
         return allTeachers;
     }
-    
+
     // Thêm giáo viên vào danh sách nếu chưa tồn tại
     public void addTeacherToList() {
         if (!allTeachers.containsKey(super.getId())) {

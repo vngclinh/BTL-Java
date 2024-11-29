@@ -15,6 +15,10 @@ public class Users {
         // Tự động thêm user mới vào list
         userList.add(this);
     }
+    // Khối static thêm user admin mặc định
+    static {
+        userList.add(new Users("admin", "admin123"));
+    }
 
     public String getUsername() {
         return username;

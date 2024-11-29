@@ -11,14 +11,10 @@ public class Form_Home extends javax.swing.JPanel {
         setText();
     }
     public void setText(){
-        Student stu = new Student();
-        jLabel6.setText(stu.getAllStudents().size()+"");
-        Teacher tcr = new Teacher();
-        jLabel2.setText(tcr.getAllTeachers().size()+"");
-        Course crs = new Course();
-        jLabel4.setText(crs.getAllCourses().size()+"");
-        Class cls = new Class();
-        jLabel8.setText(cls.getAllClasses().size()+"");
+        jLabel6.setText(Student.getAllStudents().size()+"");
+        jLabel2.setText(Teacher.getAllTeachers().size()+"");
+        jLabel4.setText(Course.getAllCourses().size()+"");
+        jLabel8.setText(Class.getAllClasses().size()+"");
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -185,7 +181,7 @@ public class Form_Home extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(120, 120, 120))
+                .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -1,5 +1,6 @@
 package GUI.Admin;
 
+import GUI.Event.EventMenuSelected;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,7 +16,11 @@ public class ListMenu<E> extends JList<E> {
     private final DefaultListModel<E> model;
     private int selectedIndex = -1;
     private int hoverIndex = -1;
+    private EventMenuSelected event;
 
+    public void addEventMenuSelected(EventMenuSelected event) {
+        this.event = event;
+    }
     public ListMenu() {
         model = new DefaultListModel<>();
         setModel(model);
@@ -25,13 +30,19 @@ public class ListMenu<E> extends JList<E> {
             public void mousePressed(MouseEvent me) {
                 if (SwingUtilities.isLeftMouseButton(me)) {
                     int index = locationToIndex(me.getPoint());
-                    if (index >= 0 && index < model.getSize()) {
-                        Object o = model.getElementAt(index);
-                        if (o instanceof Model_Menu && ((Model_Menu) o).getType() != Model_Menu.MenuType.EMPTY) {
+                    Object o = model.getElementAt(index);
+                    if (o instanceof Model_Menu) {
+                        Model_Menu menu = (Model_Menu) o;
+                        if (menu.getType() == Model_Menu.MenuType.MENU) {
                             selectedIndex = index;
+                            if (event != null) {
+                                event.selected(index);
+                            }
                         }
-                        repaint();
+                    } else {
+                        selectedIndex = index;
                     }
+                    repaint();
                 }
             }
 

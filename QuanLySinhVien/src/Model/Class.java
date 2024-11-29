@@ -29,6 +29,10 @@ public class Class implements Comparable<Class> {
         this.startDate = dateFormat.parse(startDate); // Định dạng ngày bắt đầu
         this.endDate = dateFormat.parse(endDate);     // Định dạng ngày kết thúc
         addClass();
+        Course course = Course.getAllCourses().get(courseId);
+        if (course != null) {
+            course.addClass(this); // Thêm lớp vào danh sách lớp của khóa học
+        }
     }
 
     //Tạo classID dựa trên courseID và số thứ tự của class đấy

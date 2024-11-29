@@ -17,8 +17,8 @@ public class Score{
     }
 
     public double calFinalScore() {
-        //Nghỉ quá 3 buổi sẽ trượt khóa học
-        if(this.attendance>3){
+        //Nghỉ quá 5 buổi sẽ trượt khóa học
+        if(this.attendance>5){
             return 0;
         }
         //Lấy 2 số sau dấu phẩy

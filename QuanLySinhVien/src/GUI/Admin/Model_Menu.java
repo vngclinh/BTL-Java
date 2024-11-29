@@ -48,6 +48,6 @@ public class Model_Menu {
     }
 
     public static enum MenuType {
-        TITLE, MENU, EMPTY
+        MENU, EMPTY
     }
 }
