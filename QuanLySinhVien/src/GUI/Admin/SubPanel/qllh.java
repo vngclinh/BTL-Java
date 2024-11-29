@@ -1,6 +1,8 @@
 package GUI.Admin.SubPanel;
 
 import Model.Class;
+import Model.Course;
+import Model.Teacher;
 
 public class qllh extends javax.swing.JPanel {
 
@@ -145,16 +147,16 @@ public class qllh extends javax.swing.JPanel {
                     .addComponent(txtEnd))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(90, 90, 90))
+                .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -171,7 +173,7 @@ public class qllh extends javax.swing.JPanel {
                         .addGap(20, 20, 20)
                         .addComponent(txtEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -184,19 +186,27 @@ public class qllh extends javax.swing.JPanel {
         if (txtID.getText().equals("") || txtGV.getText().equals("") || txtStart.getText().equals("") || txtEnd.getText().equals("")) {
             javax.swing.JOptionPane.showMessageDialog(this, "Thông tin không hợp lệ!");
         }
-        String clsName = txtID.getText();
-        String clsDob = txtGV.getText();
+        String clsName = txtID.getText().toUpperCase();
+        String clsDob = txtGV.getText().toUpperCase();
         String clsSdt = txtStart.getText();
         String clsEnd = txtEnd.getText();
+        if (!Course.getAllCourses().containsKey(clsName)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "ID Khóa học không tồn tại!");
+            return;
+        }
+        if (!Teacher.getAllTeachers().containsKey(clsDob)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "ID Giáo viên không tồn tại!");
+            return;
+        }
         Class cls = new Class(clsName, clsDob, clsSdt, clsEnd);
-            table.addRow(new Object[]{
-                cls.getClassId(),
-                cls.getCourseName(cls.getCourseId()),
-                cls.getTeacherName(cls.getTeacherId()),
-                cls.getStudentList().size(),
-                cls.getStartDate(),
-                cls.getEndDate()
-            });
+        table.addRow(new Object[]{
+            cls.getClassId(),
+            cls.getCourseName(cls.getCourseId()),
+            cls.getTeacherName(cls.getTeacherId()),
+            cls.getStudentList().size(),
+            cls.getStartDate(),
+            cls.getEndDate()
+        });
         txtID.setText("");
         txtGV.setText("");
         txtStart.setText("");

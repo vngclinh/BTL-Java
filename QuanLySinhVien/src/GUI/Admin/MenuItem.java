@@ -64,6 +64,7 @@ public class MenuItem extends javax.swing.JPanel {
         setOpaque(false);
 
         lblName.setBackground(new java.awt.Color(204, 255, 255));
+        lblName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblName.setForeground(new java.awt.Color(255, 255, 255));
         lblName.setText("Trang chủ");
 

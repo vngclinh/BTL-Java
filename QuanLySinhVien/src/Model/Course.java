@@ -12,15 +12,28 @@ public class Course {
     private Set<Class> classes; // Danh sách các lớp thuộc khóa học này
 
     // Constructor mặc định
-    public Course() {}
+    public Course() {
+    }
 
     // Constructor khởi tạo khóa học
     public Course(String id, String name, int totalSessions) {
-        this.id = id; // Tạo ID khóa học dựa trên tên
-        this.name = name;
+        this.id = id;
+        this.name = setName(name);
         this.totalSessions = totalSessions;
         this.classes = new TreeSet<>();
         addCourse(); // Tự động thêm vào danh sách khóa học
+    }
+
+    //Chuẩn hóa tên
+    private String setName(String name) {
+        String[] a = name.split("\\s+");
+        StringBuilder sb = new StringBuilder("");
+        for (String x : a) {
+            sb.append(Character.toUpperCase(x.charAt(0)));
+            sb.append(x.substring(1).toLowerCase());
+            sb.append(" ");
+        }
+        return sb.toString().trim();
     }
 
     // Getter cho ID
