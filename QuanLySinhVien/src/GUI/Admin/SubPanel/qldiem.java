@@ -252,7 +252,7 @@ public class qldiem extends javax.swing.JPanel {
         x.setScore(classID, CC, CK, BTVN, BTVN);
         table.addRow(new Object[]{
             x.getName(),
-            txtClassID.getText(),
+            txtClassID.getText().toUpperCase(),
             scr.calFinalScore(),
             scr.getResult()
         });

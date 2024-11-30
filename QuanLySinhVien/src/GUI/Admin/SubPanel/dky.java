@@ -137,12 +137,16 @@ public class dky extends javax.swing.JPanel {
         Student s = Student.getAllStudents().get(hvID);
         if (s.getClassAttended().containsKey(classID)) {
             lblMessage.setText("Học viên đã trong khóa học!");
+            txtHVid.setText("");
+            txtClassID.setText("");
             return;
         }
         c.addStudent(s);
         s.addAttendedClass(c);
         
         lblMessage.setText("Thêm học viên vào lớp thành công!");
+        txtHVid.setText("");
+        txtClassID.setText("");
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

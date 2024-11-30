@@ -40,19 +40,22 @@ public class AdminFrame extends javax.swing.JFrame {
             @Override
             public void selected(int index) {
                 System.out.println(index);
-                if (index == 13) {
+                if (index == 14) {
                     System.exit(0);
-                } else if (index == 1) {
+                } else if (index == 0) {
+                    home.setText();
+                    setForm(home);
+                } else if (index == 2) {
                     setForm(QLGV);
-                } else if (index == 3){
+                } else if (index == 4) {
                     setForm(QLSV);
-                } else if(index == 5){
+                } else if (index == 6) {
                     setForm(QLKH);
-                } else if(index == 7){
+                } else if (index == 8) {
                     setForm(QLLH);
-                } else if(index == 9){
+                } else if (index == 10) {
                     setForm(QLD);
-                } else if(index == 11){
+                } else if (index == 12) {
                     setForm(DK);
                 }
             }
