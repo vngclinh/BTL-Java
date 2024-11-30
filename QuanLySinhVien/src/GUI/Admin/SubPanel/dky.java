@@ -87,7 +87,7 @@ public class dky extends javax.swing.JPanel {
         jButton3.setBackground(new java.awt.Color(240, 204, 60));
         jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(51, 51, 51));
-        jButton3.setText("Tải danh sách");
+        jButton3.setText("Tải file lên");
         jButton3.setPreferredSize(new java.awt.Dimension(160, 28));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,7 +98,7 @@ public class dky extends javax.swing.JPanel {
         jButton4.setBackground(new java.awt.Color(240, 204, 60));
         jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(51, 51, 51));
-        jButton4.setText("Lưu danh sách");
+        jButton4.setText("Lưu vào file");
         jButton4.setPreferredSize(new java.awt.Dimension(160, 28));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,7 +196,7 @@ public class dky extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         lblMessage.setText("");
-        String filePath = "src/GUI/Database/RegisterInput.in";
+        String filePath = "src/GUI/Database/Register.in";
         int ok=0;
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String hvID, classID;
@@ -236,7 +236,7 @@ public class dky extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         lblMessage.setText("");
-        String filePath = "src/GUI/Database/RegisterInput.in";
+        String filePath = "src/GUI/Database/Register.in";
         int ok=0;
         try (BufferedWriter writer2 = new BufferedWriter(new FileWriter(filePath))) {
             for (Student x : Student.getAllStudents().values()) {
@@ -250,7 +250,7 @@ public class dky extends javax.swing.JPanel {
                     }
                 }
             }
-            if(ok==1) lblMessage.setText("Ghi file thành công!");
+            if(ok==1) lblMessage.setText("Dữ liệu đã được ghi lại!");
             else lblMessage.setText("Chưa có dữ liệu!");
         } catch (IOException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra!");

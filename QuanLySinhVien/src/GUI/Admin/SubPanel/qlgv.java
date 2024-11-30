@@ -290,6 +290,7 @@ public class qlgv extends javax.swing.JPanel {
             for (Teacher teacher : Teacher.getAllTeachers().values()) {
                 writer2.write(teacher.toString());
                 writer2.newLine(); // Xuống dòng sau mỗi giáo viên
+                writer2.newLine();
             }
             javax.swing.JOptionPane.showMessageDialog(this, "Ghi file thành công!");
         } catch (IOException e) {

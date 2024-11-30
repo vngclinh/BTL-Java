@@ -202,7 +202,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="T&#x1ea3;i danh s&#xe1;ch"/>
+        <Property name="text" type="java.lang.String" value="T&#x1ea3;i file l&#xea;n"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[160, 28]"/>
         </Property>
@@ -222,7 +222,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="L&#x1b0;u danh s&#xe1;ch"/>
+        <Property name="text" type="java.lang.String" value="L&#x1b0;u v&#xe0;o file"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[160, 28]"/>
         </Property>

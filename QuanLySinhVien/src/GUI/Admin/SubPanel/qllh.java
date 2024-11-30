@@ -319,6 +319,7 @@ public class qllh extends javax.swing.JPanel {
             for (Class x : Class.getAllClasses().values()) {
                 writer2.write(x.toString());
                 writer2.newLine(); // Xuống dòng
+                writer2.newLine();
             }
             javax.swing.JOptionPane.showMessageDialog(this, "Ghi file thành công!");
         } catch (IOException e) {

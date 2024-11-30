@@ -284,6 +284,7 @@ public class qlsv extends javax.swing.JPanel {
             for (Student x : Student.getAllStudents().values()) {
                 writer2.write(x.toString());
                 writer2.newLine(); // Xuống dòng 
+                writer2.newLine();
             }
             javax.swing.JOptionPane.showMessageDialog(this, "Ghi file thành công!");
         } catch (IOException e) {

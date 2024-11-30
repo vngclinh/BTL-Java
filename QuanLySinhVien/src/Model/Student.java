@@ -57,15 +57,19 @@ public class Student extends Person implements Comparable<Student> {
         res.append("Student ID: ").append(super.getId()).append("\n");
         res.append("Student Name: ").append(super.getName()).append("\n");
 
+        boolean hasGradedClasses = false;
+
         for (Map.Entry<String, Score> entry : classAttended.entrySet()) {
             String classId = entry.getKey();
             Score grade = entry.getValue();
             if (!grade.getResult().equals("Not Graded")) {
                 res.append("Enrolled Class: ").append(classId).append("\n")
                         .append(grade.toString()).append("\n");
+                hasGradedClasses = true;
             }
         }
-        return res.toString().trim();
+
+        return hasGradedClasses ? res.toString() : "";
     }
 
     //Dùng để lưu vào file
