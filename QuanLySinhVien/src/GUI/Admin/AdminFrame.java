@@ -25,6 +25,7 @@ public class AdminFrame extends javax.swing.JFrame {
 
     public AdminFrame() throws ParseException {
         initComponents();
+        this.setTitle("Quản lý học viên");
         this.setSize(1000, 600);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
