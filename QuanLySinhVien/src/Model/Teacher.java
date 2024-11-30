@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Teacher extends Person {
 
-    private static int cnt =0;
+    private static int cnt = 0;
     private TreeSet<String> teachingCourses = new TreeSet<>(); // ID các lớp học phần đang dạy
     private String email;
     private static TreeMap<String, Teacher> allTeachers = new TreeMap<>(); // Lưu trữ tất cả các giáo viên
@@ -30,9 +30,10 @@ public class Teacher extends Person {
         }
     }
 
-    public void addTeachingClass(String classID){
+    public void addTeachingClass(String classID) {
         this.teachingCourses.add(classID);
     }
+
     //Tạo tài khoản email
     private String generateEmail() {
         StringBuilder sb = new StringBuilder("");
@@ -54,10 +55,17 @@ public class Teacher extends Person {
         return teachingCourses;
     }
 
+    //Dùng để lưu vào file
+    public String save() {
+        return super.getName() + "\n" + super.getDob() + "\n" + super.getPhoneNum();
+    }
+
     @Override
     public String toString() {
+        String classIds = this.getTeachingCourses().isEmpty() ? "Hien khong co lop"
+                : this.getTeachingCourses().toString().replaceAll("[\\[\\]]", "");
         return super.toString()
                 + "\nEmail: " + email
-                + "\nTeaching Courses: " + String.join(", ", teachingCourses);
+                + "\nTeaching Courses: " + classIds;
     }
 }

@@ -52,21 +52,25 @@ public class Student extends Person implements Comparable<Student> {
     }
 
     // Hàm in chi tiết thông tin học viên, khóa học, và điểm số
-    public void printStudentResult(Map<String, Class> classMap, Map<String, Course> courseMap) {
-        System.out.printf("Student ID: %s, Name: %s\n", this.getId(), this.getName());
-        System.out.println("Enrolled Courses:");
+    public String printStudentResult() {
+        StringBuilder res = new StringBuilder();
+        res.append("Student ID: ").append(super.getId()).append("\n");
+        res.append("Student Name: ").append(super.getName()).append("\n");
+
         for (Map.Entry<String, Score> entry : classAttended.entrySet()) {
             String classId = entry.getKey();
             Score grade = entry.getValue();
-            Class classInfo = classMap.get(classId);
-            if (classInfo != null) {
-                Course courseInfo = courseMap.get(classInfo.getCourseId());
-                if (courseInfo != null) {
-                    System.out.printf("- Course: %s (Course ID: %s), Class ID: %s\n", courseInfo.getName(), courseInfo.getId(), classId);
-                    System.out.printf("  Score: %s\n", grade != null ? grade : "No grade assigned");
-                }
+            if (!grade.getResult().equals("Not Graded")) {
+                res.append("Enrolled Class: ").append(classId).append("\n")
+                        .append(grade.toString()).append("\n");
             }
         }
+        return res.toString().trim();
+    }
+
+    //Dùng để lưu vào file
+    public String save() {
+        return super.getName() + "\n" + super.getDob() + "\n" + super.getPhoneNum();
     }
 
     @Override

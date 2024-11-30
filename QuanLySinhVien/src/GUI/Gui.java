@@ -6,7 +6,6 @@ import java.text.ParseException;
 public class Gui {
     private GUI.Admin.AdminFrame adminframe;
     private GUI.Login.Login loginframe;
-    private GUI.SampleDatabase SampleData;
 
     public Gui() throws ParseException {
         this.adminframe = new GUI.Admin.AdminFrame();

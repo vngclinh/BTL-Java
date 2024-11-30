@@ -1,6 +1,11 @@
 package GUI.Admin.SubPanel;
 
 import Model.Course;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class qlkh extends javax.swing.JPanel {
 
@@ -10,6 +15,7 @@ public class qlkh extends javax.swing.JPanel {
     }
 
     public void setData() {
+        table.clearRows();
         for (Course crs : Course.getAllCourses().values()) {
             table.addRow(new Object[]{
                 crs.getId(),
@@ -33,6 +39,8 @@ public class qlkh extends javax.swing.JPanel {
         panelBorder1 = new GUI.Admin.PanelBorder();
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new GUI.Admin.SubPanel.Table();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 204));
 
@@ -116,9 +124,31 @@ public class qlkh extends javax.swing.JPanel {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        jButton3.setBackground(new java.awt.Color(240, 204, 60));
+        jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(51, 51, 51));
+        jButton3.setText("Tải file lên");
+        jButton3.setPreferredSize(new java.awt.Dimension(160, 28));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(240, 204, 60));
+        jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(51, 51, 51));
+        jButton4.setText("Lưu vào file");
+        jButton4.setPreferredSize(new java.awt.Dimension(160, 28));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -140,9 +170,14 @@ public class qlkh extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(64, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
@@ -161,8 +196,11 @@ public class qlkh extends javax.swing.JPanel {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtBuoi, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addGap(28, 28, 28)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -174,10 +212,10 @@ public class qlkh extends javax.swing.JPanel {
             javax.swing.JOptionPane.showMessageDialog(this, "Thông tin không hợp lệ!");
             return;
         }
-        String name = txtName.getText();
-        String id = txtID.getText().toUpperCase();
+        String name = txtName.getText().trim();
+        String id = txtID.getText().trim().toUpperCase();
         int tcrBuoi = Integer.parseInt(txtBuoi.getText());
-        if(Course.getAllCourses().containsKey(id)){
+        if (Course.getAllCourses().containsKey(id)) {
             javax.swing.JOptionPane.showMessageDialog(this, "ID Khóa học đã tồn tại!");
             return;
         }
@@ -192,9 +230,68 @@ public class qlkh extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String filePath = "src/GUI/Database/CourseInput.in";
+        int ok = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String id, name;
+            int sessions;
+            while ((id = reader.readLine()) != null) {
+                ok = 1;
+                id = id.trim().toUpperCase();
+                name = reader.readLine().trim();
+                String tmp = reader.readLine().trim();
+
+                if (name != null && tmp != null) {
+                    sessions = Integer.parseInt(tmp);
+                    if (Course.getAllCourses().containsKey(id)) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "ID Khóa học đã tồn tại!");
+                        return;
+                    }
+                    Course x = new Course(id, name, sessions);
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Thông tin không hợp lệ!");
+                    break;
+                }
+            }
+            if (ok == 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Chưa có dữ liệu!");
+            }
+        } catch (IOException e) {
+        }
+        setData();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        String filePath1 = "src/GUI/Database/CourseInput.in";
+        String filePath2 = "src/GUI/Database/CourseOutput.in";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath1))) {
+            for (Course x : Course.getAllCourses().values()) {
+                writer.write(x.save());
+                writer.newLine(); // Xuống dòng 
+            }
+        } catch (IOException e) {
+        }
+
+        try (BufferedWriter writer2 = new BufferedWriter(new FileWriter(filePath2))) {
+            for (Course x : Course.getAllCourses().values()) {
+                writer2.write(x.toString());
+                writer2.newLine(); // Xuống dòng 
+            }
+            javax.swing.JOptionPane.showMessageDialog(this, "Ghi file thành công!");
+        } catch (IOException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra!");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

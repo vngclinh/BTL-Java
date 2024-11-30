@@ -22,8 +22,8 @@ public class Class implements Comparable<Class> {
     // Constructor khởi tạo lớp học
     public Class(String courseId, String teacherId, String startDate, String endDate) {
         this.classId = setClassId(courseId);
-        this.courseId = courseId;
-        this.teacherId = teacherId;
+        this.courseId = courseId.toUpperCase();
+        this.teacherId = teacherId.toUpperCase();
         this.studentList = new TreeSet<>();
         this.startDate = setDob(startDate); // Chuẩn hóa ngày bắt đầu
         this.endDate = setDob(endDate);     // Chuẩn hóa ngày kết thúc
@@ -36,7 +36,7 @@ public class Class implements Comparable<Class> {
     }
 
     public void addStudentList(Student stu) {
-        if(!this.studentList.contains(stu)){
+        if (!this.studentList.contains(stu)) {
             this.studentList.add(stu);
         }
     }
@@ -69,7 +69,7 @@ public class Class implements Comparable<Class> {
     public String setClassId(String courseID) {
         Course course = Course.getAllCourses().get(courseID);
         if (course != null) {
-            return course.getId() + "-" + (course.getClasses().size() + 1);
+            return course.getId() + "-" + (course.getClasses().size()+1);
         }
         throw new IllegalArgumentException("Course ID not found: " + courseID);
     }
@@ -117,17 +117,15 @@ public class Class implements Comparable<Class> {
     }
 
     // Kiểm tra và xóa các lớp đã kết thúc
-    public static void removeExpiredClasses() {
+    public boolean removeExpiredClasses(Class x) {
         Date today = new Date();
-        allClasses.entrySet().removeIf(entry -> {
-            String endDateStr = entry.getValue().getEndDate();
-            try {
-                Date endDate = new SimpleDateFormat("dd/MM/yyyy").parse(endDateStr);
-                return endDate.before(today);
-            } catch (ParseException e) {
-                return false;
-            }
-        });
+        String endDateStr = x.getEndDate();
+        try {
+            Date end = new SimpleDateFormat("dd/MM/yyyy").parse(endDateStr);
+            return end.before(today);
+        } catch (ParseException e) {
+            return false;
+        }
     }
 
     // Thêm sinh viên vào lớp học
@@ -157,14 +155,6 @@ public class Class implements Comparable<Class> {
         return this.classId.compareTo(o.classId);
     }
 
-    // Ghi đè phương thức toString
-    @Override
-    public String toString() {
-        return "Class ID: " + this.classId
-                + "\nTeacher: " + this.teacherId
-                + "\nNumber of students: " + this.studentList.size();
-    }
-
     // Chuẩn hóa ngày
     private String setDob(String dob) {
         dob = dob.trim();
@@ -184,5 +174,23 @@ public class Class implements Comparable<Class> {
             }
         }
         return dob;
+    }
+    //Dùng để lưu vào file input
+    public String save(){
+        return this.courseId +"\n" + this.teacherId + "\n" + this.startDate +"\n"+this.endDate;
+    }
+    
+    //In ra thông tin lớp học
+    @Override
+    public String toString() {
+        String courseName = getCourseName(this.courseId);
+        String teacherName = getTeacherName(this.teacherId);
+
+        return "Class ID: " + this.classId +
+               "\nCourse Name: " + (courseName != null ? courseName : "0") +
+               "\nTeacher Name: " + (teacherName != null ? teacherName : "0") +
+               "\nNumber of Students: " + this.studentList.size() +
+               "\nStart Date: " + this.startDate +
+               "\nEnd Date: " + this.endDate;
     }
 }

@@ -3,11 +3,41 @@ package GUI.Admin.SubPanel;
 import Model.Score;
 import Model.Student;
 import Model.Class;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Map;
 
 public class qldiem extends javax.swing.JPanel {
 
     public qldiem() {
         initComponents();
+    }
+
+    public void setData() {
+        table.clearRows();
+        for (Student x : Student.getAllStudents().values()) {
+            if (!x.getClassAttended().isEmpty()) {
+                for (Map.Entry<String, Score> entry : x.getClassAttended().entrySet()) {
+                    String classID = entry.getKey();
+                    Score y = entry.getValue();
+                    if (!y.getResult().equals("Not Graded")) {
+                        table.addRow(new Object[]{
+                            x.getName(),
+                            classID,
+                            y.getAttendance(),
+                            y.getHomework(),
+                            y.getMidTerm(),
+                            y.getEndTerm(),
+                            y.calFinalScore(),
+                            y.getResult()
+                        });
+                    }
+                }
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -30,6 +60,8 @@ public class qldiem extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         txtGK = new javax.swing.JTextField();
         txtCK = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 204));
 
@@ -67,7 +99,7 @@ public class qldiem extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(240, 204, 60));
         jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(51, 51, 51));
-        jButton2.setText("Thêm điểm");
+        jButton2.setText("Vào điểm");
         jButton2.setPreferredSize(new java.awt.Dimension(160, 28));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,11 +118,11 @@ public class qldiem extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tên học sinh", "ID lớp", "Điểm trung bình", "Kết quả"
+                "Tên HV", "ID lớp", "CC", "BTVN", "GK", "CK", "ĐTB", "Kết quả"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -116,7 +148,7 @@ public class qldiem extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -157,6 +189,28 @@ public class qldiem extends javax.swing.JPanel {
         txtCK.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCK.setForeground(new java.awt.Color(51, 51, 51));
 
+        jButton3.setBackground(new java.awt.Color(240, 204, 60));
+        jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(51, 51, 51));
+        jButton3.setText("Tải file lên");
+        jButton3.setPreferredSize(new java.awt.Dimension(160, 28));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(240, 204, 60));
+        jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(51, 51, 51));
+        jButton4.setText("Lưu vào file");
+        jButton4.setPreferredSize(new java.awt.Dimension(160, 28));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,10 +242,15 @@ public class qldiem extends javax.swing.JPanel {
                         .addComponent(txtCC, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(121, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(65, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
@@ -217,9 +276,16 @@ public class qldiem extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCK, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(23, 23, 23)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -237,25 +303,22 @@ public class qldiem extends javax.swing.JPanel {
         double BTVN = Double.parseDouble(txtBTVN.getText());
         double GK = Double.parseDouble(txtGK.getText());
         double CK = Double.parseDouble(txtCK.getText());
-        Score scr = new Score(CC, BTVN, GK, CK);
-        if (!Class.getAllClasses().containsKey(classID) || !Student.getAllStudents().containsKey(hsID)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Thông tin không tồn tại!");
+        if (!Class.getAllClasses().containsKey(classID)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "ID lớp học không tồn tại!");
+            return;
+        } else if (!Student.getAllStudents().containsKey(hsID)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "ID học sinh không tồn tại!");
             return;
         } else {
             Class cls = Class.getAllClasses().get(classID);
             if (!cls.getStudentList().contains(Student.getAllStudents().get(hsID))) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Học sinh không trong lớp học này!");
+                javax.swing.JOptionPane.showMessageDialog(this, "Học viên " + hsID + " không trong lớp " + classID);
                 return;
             }
         }
         Student x = Student.getAllStudents().get(hsID);
-        x.setScore(classID, CC, CK, BTVN, BTVN);
-        table.addRow(new Object[]{
-            x.getName(),
-            txtClassID.getText().toUpperCase(),
-            scr.calFinalScore(),
-            scr.getResult()
-        });
+        x.setScore(classID, CC, BTVN, GK, CK);
+        setData();
         txtClassID.setText("");
         txtHSid.setText("");
         txtCC.setText("");
@@ -280,9 +343,73 @@ public class qldiem extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGKActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String filePath = "src/GUI/DataBase/ScoreInput.in";
+        int ok = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String classID, hvID;
+            int CC;
+            double BTVN, GK, CK;
+            while ((classID = reader.readLine()) != null) {
+                ok = 1;
+                classID = classID.toUpperCase();
+                hvID = reader.readLine();
+                String cc = reader.readLine();
+                String btvn = reader.readLine();
+                String gk = reader.readLine();
+                String ck = reader.readLine();
+                if (cc != null && gk != null && ck != null) {
+                    CC = Integer.parseInt(cc);
+                    BTVN = Double.parseDouble(btvn);
+                    GK = Double.parseDouble(gk);
+                    CK = Double.parseDouble(ck);
+                    Score scr = new Score(CC, BTVN, GK, CK);
+                    if (!Class.getAllClasses().containsKey(classID)) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "ID lớp học không tồn tại! " + classID);
+                        return;
+                    } else if (!Student.getAllStudents().containsKey(hvID)) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "ID học sinh không tồn tại! " + hvID);
+                        return;
+                    } else {
+                        Class cls = Class.getAllClasses().get(classID);
+                        if (!cls.getStudentList().contains(Student.getAllStudents().get(hvID))) {
+                            javax.swing.JOptionPane.showMessageDialog(this, "Học viên " + hvID + " không trong lớp " + classID);
+                            return;
+                        }
+                    }
+                    Student x = Student.getAllStudents().get(hvID);
+                    x.setScore(classID, CC, CK, BTVN, BTVN);
+                    setData();
+                }
+            }
+            if (ok == 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Chưa có dữ liệu!");
+            }
+        } catch (IOException ex) {
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        String filePath = "src/GUI/Database/ScoreOutput.in";
+
+        try (BufferedWriter writer2 = new BufferedWriter(new FileWriter(filePath))) {
+            for (Student x : Student.getAllStudents().values()) {
+                writer2.write(x.printStudentResult());
+                writer2.newLine(); // Xuống dòng 
+            }
+            javax.swing.JOptionPane.showMessageDialog(this, "Ghi file thành công!");
+        } catch (IOException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra!");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

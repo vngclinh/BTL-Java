@@ -80,6 +80,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "UID: " + id + "\nName: " + name + "\nDob: " + dob + "\nPhone number: " + phoneNum;
+        return "ID: " + id + "\nName: " + name + "\nDob: " + dob + "\nPhone number: " + phoneNum;
     }
 }

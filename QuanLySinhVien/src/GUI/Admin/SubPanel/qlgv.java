@@ -1,6 +1,11 @@
 package GUI.Admin.SubPanel;
 
 import Model.Teacher;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class qlgv extends javax.swing.JPanel {
 
@@ -10,8 +15,9 @@ public class qlgv extends javax.swing.JPanel {
     }
 
     public void setData() {
+        table.clearRows();
         for (Teacher tcr : Teacher.getAllTeachers().values()) {
-            String classIds = tcr.getTeachingCourses().isEmpty() ? "Không có lớp"
+            String classIds = tcr.getTeachingCourses().isEmpty() ? "Hien khong co lop"
                     : tcr.getTeachingCourses().toString().replaceAll("[\\[\\]]", "");
             table.addRow(new Object[]{
                 tcr.getId(),
@@ -39,6 +45,7 @@ public class qlgv extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new GUI.Admin.SubPanel.Table();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 204));
 
@@ -125,18 +132,29 @@ public class qlgv extends javax.swing.JPanel {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jButton3.setBackground(new java.awt.Color(240, 204, 60));
         jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(51, 51, 51));
-        jButton3.setText("Cập nhật");
+        jButton3.setText("Tải file lên");
         jButton3.setPreferredSize(new java.awt.Dimension(160, 28));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(240, 204, 60));
+        jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(51, 51, 51));
+        jButton4.setText("Lưu vào file");
+        jButton4.setPreferredSize(new java.awt.Dimension(160, 28));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -150,7 +168,7 @@ public class qlgv extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(181, 181, 181)
+                .addGap(175, 175, 175)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(txtDob)
@@ -162,6 +180,8 @@ public class qlgv extends javax.swing.JPanel {
                     .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(66, 66, 66))
@@ -169,7 +189,7 @@ public class qlgv extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
@@ -181,11 +201,12 @@ public class qlgv extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtSdt, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addGap(31, 31, 31)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -197,12 +218,16 @@ public class qlgv extends javax.swing.JPanel {
             javax.swing.JOptionPane.showMessageDialog(this, "Thông tin không hợp lệ!");
             return;
         }
-        String tcrName = txtName.getText().toUpperCase();
-        String tcrDob = txtDob.getText();
-        String tcrSdt = txtSdt.getText();
+        String tcrName = txtName.getText().trim().toUpperCase();
+        String tcrDob = txtDob.getText().trim();
+        String tcrSdt = txtSdt.getText().trim();
+        for (Teacher x : Teacher.getAllTeachers().values()) {
+            if (x.getPhoneNum().equals(tcrSdt)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Giáo viên đã có trong hệ thống!");
+                return;
+            }
+        }
         Teacher tcr = new Teacher(tcrName, tcrDob, tcrSdt);
-        String classIds = tcr.getTeachingCourses().isEmpty() ? "Không có lớp"
-                : tcr.getTeachingCourses().toString().replaceAll("[\\[\\]]", "");
         setData();
         txtName.setText("");
         txtDob.setText("");
@@ -215,14 +240,68 @@ public class qlgv extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        table.clearRows();
+        String filePath = "src/GUI/Database/TeacherInput.in";
+        int ok = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String name, birthDate, phoneNumber;
+            while ((name = reader.readLine()) != null) {
+                ok = 1;
+                name = name.trim();
+                birthDate = reader.readLine().trim();
+                phoneNumber = reader.readLine().trim();
+
+                if (birthDate != null && phoneNumber != null) {
+                    for (Teacher x : Teacher.getAllTeachers().values()) {
+                        if (x.getPhoneNum().equals(phoneNumber)) {
+                            javax.swing.JOptionPane.showMessageDialog(this, "Giáo viên đã có trong hệ thống!");
+                            return;
+                        }
+                    }
+                    Teacher x = new Teacher(name, birthDate, phoneNumber);
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Thông tin không hợp lệ!");
+                    break;
+                }
+            }
+            if (ok == 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Chưa có dữ liệu!");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         setData();
+
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        String filePath1 = "src/GUI/Database/TeacherInput.in";
+        String filePath2 = "src/GUI/Database/TeacherOutput.in";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath1))) {
+            for (Teacher teacher : Teacher.getAllTeachers().values()) {
+                writer.write(teacher.save());
+                writer.newLine(); // Xuống dòng sau mỗi giáo viên
+            }
+        } catch (IOException e) {
+        }
+
+        try (BufferedWriter writer2 = new BufferedWriter(new FileWriter(filePath2))) {
+            for (Teacher teacher : Teacher.getAllTeachers().values()) {
+                writer2.write(teacher.toString());
+                writer2.newLine(); // Xuống dòng sau mỗi giáo viên
+            }
+            javax.swing.JOptionPane.showMessageDialog(this, "Ghi file thành công!");
+        } catch (IOException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra!");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

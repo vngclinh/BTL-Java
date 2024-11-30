@@ -17,7 +17,7 @@ public class Course {
 
     // Constructor khởi tạo khóa học
     public Course(String id, String name, int totalSessions) {
-        this.id = id;
+        this.id = id.toUpperCase();
         this.name = setName(name);
         this.totalSessions = totalSessions;
         this.classes = new TreeSet<>();
@@ -70,13 +70,18 @@ public class Course {
     public void addClass(Class c) {
         classes.add(c);
     }
+    //Dùng để lưu vào file
+    public String save() {
+        return this.id + "\n" + this.name + "\n" + this.totalSessions;
+    }
 
     // Ghi đè phương thức toString
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
         for (Class x : this.classes) {
-            if (x.getStudentList().size() < 20) {
+            //Lấy những lớp học còn đăng ký vào được
+            if (x.getStudentList().size() < 20 && x.removeExpiredClasses(x)) {
                 res.append(x.getClassId()).append(" ");
             }
         }

@@ -15,7 +15,6 @@ import javax.swing.JComponent;
 public class AdminFrame extends javax.swing.JFrame {
 
     private Form_Home home;
-    private GUI.SampleDatabase sample;
     private GUI.Admin.SubPanel.qlgv QLGV;
     private GUI.Admin.SubPanel.qlsv QLSV;
     private GUI.Admin.SubPanel.qlkh QLKH;
@@ -30,7 +29,6 @@ public class AdminFrame extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         mainPanel.setLayout(new java.awt.BorderLayout());
-        sample = new GUI.SampleDatabase();
         QLGV = new qlgv();
         QLSV = new qlsv();
         QLKH = new qlkh();
@@ -47,14 +45,19 @@ public class AdminFrame extends javax.swing.JFrame {
                     home.setText();
                     setForm(home);
                 } else if (index == 2) {
+                    QLGV.setData();
                     setForm(QLGV);
                 } else if (index == 4) {
+                    QLSV.setData();
                     setForm(QLSV);
                 } else if (index == 6) {
+                    QLKH.setData();
                     setForm(QLKH);
                 } else if (index == 8) {
+                    QLLH.setData();
                     setForm(QLLH);
                 } else if (index == 10) {
+                    QLD.setData();
                     setForm(QLD);
                 } else if (index == 12) {
                     setForm(DK);

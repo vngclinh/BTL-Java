@@ -142,7 +142,7 @@ public class QuanLySinhVien {
 
                 case 8 -> {
                     System.out.println("=== Student Results ===");
-                    students.values().forEach(s -> s.printStudentResult(classes, courses));
+                    students.values().forEach(s -> s.printStudentResult());
                 }
 
                 case 9 -> {
