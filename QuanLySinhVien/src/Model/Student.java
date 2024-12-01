@@ -44,7 +44,7 @@ public class Student extends Person implements Comparable<Student> {
     }
 
     // Ghi điểm cho học viên
-    public void setScore(String classID, int attendance, double homework, double midTerm, double endTerm) {
+    public void setScore(String classID, double attendance, double homework, double midTerm, double endTerm) {
         if (classAttended.containsKey(classID)) {
             Score grade = new Score(attendance, homework, midTerm, endTerm);
             classAttended.put(classID, grade);
@@ -68,7 +68,7 @@ public class Student extends Person implements Comparable<Student> {
                 hasGradedClasses = true;
             }
         }
-
+        res.append("\n");
         return hasGradedClasses ? res.toString() : "";
     }
 

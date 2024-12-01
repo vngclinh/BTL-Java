@@ -17,7 +17,7 @@ public class qlgv extends javax.swing.JPanel {
     public void setData() {
         table.clearRows();
         for (Teacher tcr : Teacher.getAllTeachers().values()) {
-            String classIds = tcr.getTeachingCourses().isEmpty() ? "Hien khong co lop"
+            String classIds = tcr.getTeachingCourses().isEmpty() ? "Hiện không có lớp"
                     : tcr.getTeachingCourses().toString().replaceAll("[\\[\\]]", "");
             table.addRow(new Object[]{
                 tcr.getId(),
@@ -223,7 +223,7 @@ public class qlgv extends javax.swing.JPanel {
         String tcrSdt = txtSdt.getText().trim();
         for (Teacher x : Teacher.getAllTeachers().values()) {
             if (x.getPhoneNum().equals(tcrSdt)) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Giáo viên đã có trong hệ thống!");
+                javax.swing.JOptionPane.showMessageDialog(this, "Giáo viên "+x.getId()+" đã có trong hệ thống!");
                 return;
             }
         }

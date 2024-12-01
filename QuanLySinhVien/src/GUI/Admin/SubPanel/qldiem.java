@@ -73,7 +73,7 @@ public class qldiem extends javax.swing.JPanel {
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("   ID học sinh   :");
+        jLabel2.setText("   ID học viên   :");
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -297,12 +297,12 @@ public class qldiem extends javax.swing.JPanel {
                 || txtGK.getText().equals("") || txtCK.getText().equals("")) {
             javax.swing.JOptionPane.showMessageDialog(this, "Thông tin không hợp lệ!");
         }
-        String classID = txtClassID.getText().toUpperCase();
-        String hsID = txtHSid.getText().toUpperCase();
-        int CC = Integer.parseInt(txtCC.getText());
-        double BTVN = Double.parseDouble(txtBTVN.getText());
-        double GK = Double.parseDouble(txtGK.getText());
-        double CK = Double.parseDouble(txtCK.getText());
+        String classID = txtClassID.getText().trim().toUpperCase();
+        String hsID = txtHSid.getText().trim().toUpperCase();
+        double CC = Double.parseDouble(txtCC.getText().trim());
+        double BTVN = Double.parseDouble(txtBTVN.getText().trim());
+        double GK = Double.parseDouble(txtGK.getText().trim());
+        double CK = Double.parseDouble(txtCK.getText().trim());
         if (!Class.getAllClasses().containsKey(classID)) {
             javax.swing.JOptionPane.showMessageDialog(this, "ID lớp học không tồn tại!");
             return;
@@ -349,18 +349,17 @@ public class qldiem extends javax.swing.JPanel {
         int ok = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String classID, hvID;
-            int CC;
-            double BTVN, GK, CK;
+            double CC, BTVN, GK, CK;
             while ((classID = reader.readLine()) != null) {
                 ok = 1;
-                classID = classID.toUpperCase();
-                hvID = reader.readLine();
-                String cc = reader.readLine();
-                String btvn = reader.readLine();
-                String gk = reader.readLine();
-                String ck = reader.readLine();
+                classID = classID.trim().toUpperCase();
+                hvID = reader.readLine().trim().toUpperCase();
+                String cc = reader.readLine().trim();
+                String btvn = reader.readLine().trim();
+                String gk = reader.readLine().trim();
+                String ck = reader.readLine().trim();
                 if (cc != null && gk != null && ck != null) {
-                    CC = Integer.parseInt(cc);
+                    CC = Double.parseDouble(cc);
                     BTVN = Double.parseDouble(btvn);
                     GK = Double.parseDouble(gk);
                     CK = Double.parseDouble(ck);
@@ -397,7 +396,6 @@ public class qldiem extends javax.swing.JPanel {
         try (BufferedWriter writer2 = new BufferedWriter(new FileWriter(filePath))) {
             for (Student x : Student.getAllStudents().values()) {
                 writer2.write(x.printStudentResult());
-                writer2.newLine(); // Xuống dòng 
             }
             javax.swing.JOptionPane.showMessageDialog(this, "Ghi file thành công!");
         } catch (IOException e) {

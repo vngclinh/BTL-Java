@@ -1,48 +1,65 @@
 ID Course: ENG001
 Course name: Toefl Preparation
 Number of sessions: 24
-Available classes: ENG001-1 ENG001-2
+Available classes: ENG001-2
+
 ID Course: ENG002
 Course name: Toeic Preparation
 Number of sessions: 30
-Available classes: ENG002-1 ENG002-2
+Available classes: 
+
 ID Course: ENG003
 Course name: English For Travel
 Number of sessions: 20
-Available classes: ENG003-1
+Available classes: 
+
 ID Course: ENG004
 Course name: English For Professionals
 Number of sessions: 25
 Available classes: 
+
 ID Course: ENG005
 Course name: English For University Students
 Number of sessions: 40
 Available classes: 
-ID Course: ENG006  
+
+ID Course: ENG006
 Course name: Pronunciation And Accent Training
 Number of sessions: 35
 Available classes: 
-ID Course: ENG301  
+
+ID Course: ENG301
 Course name: Conversational English
 Number of sessions: 22
-Available classes: 
-ID Course: ENG302  
+Available classes: ENG301-1
+
+ID Course: ENG302
 Course name: Public Speaking In English
 Number of sessions: 32
 Available classes: 
-ID Course: ENG303  
+
+ID Course: ENG303
 Course name: Writing Skills Development
 Number of sessions: 26
 Available classes: 
-ID Course: ENG304  
+
+ID Course: ENG304
 Course name: English For It Professionals
 Number of sessions: 38
 Available classes: 
-ID Course: ENG305  
+
+ID Course: ENG305
 Course name: English Literature And Analysis
 Number of sessions: 34
 Available classes: 
-ID Course: ENG306  
+
+ID Course: ENG306
 Course name: Creative Writing In English
 Number of sessions: 29
 Available classes: 
+
+ID Course: IELTS
+Course name: Ielts Advanced
+Number of sessions: 20
+Available classes: 
+
