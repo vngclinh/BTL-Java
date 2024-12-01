@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,6 +14,10 @@ public class Table extends JTable {
         setShowHorizontalLines(true);
         setShowVerticalLines(true);
         setGridColor(new Color(230, 230, 230));
+        setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        setColumnSelectionAllowed(false);   // Không cho phép chọn cột riêng lẻ
+        setCellSelectionEnabled(false);     // Tắt chọn từng ô
+        setRowSelectionAllowed(true);
         setRowHeight(40);
         getTableHeader().setReorderingAllowed(false);
         getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
@@ -31,8 +36,10 @@ public class Table extends JTable {
                 setBorder(getBorder()); // Khôi phục viền mặc định
                 //setBorder(noFocusBorder);
                 if (selected) {
+                    com.setBackground(new Color(184, 207, 229));
                     com.setForeground(new Color(15, 89, 140));
                 } else {
+                    com.setBackground(Color.WHITE);
                     com.setForeground(new Color(102, 102, 102));
                 }
                 return com;

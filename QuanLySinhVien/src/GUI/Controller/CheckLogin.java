@@ -26,8 +26,7 @@ public class CheckLogin {
     public void login() {
         String username = loginframe.jTextField1.getText();
         String password = new String(loginframe.jPasswordField1.getPassword()); // Chuyển char[] thành String
-        System.out.println(username);
-        System.out.println(password);
+        
 
         for (Users admin : Model.Users.getUserList()) {
             System.out.println(admin.getUsername());
