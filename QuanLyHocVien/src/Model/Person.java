@@ -4,17 +4,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Person {
+abstract class Person {
 
     private String id;
     private String name;
     private String dob;
     private String phoneNum;
 
-    public Person(){
-        
+    public Person() {
     }
-    
+
     public Person(String id, String name, String dob, String phoneNum) {
         this.id = id;
         this.name = setName(name);
@@ -22,10 +21,10 @@ public class Person {
         this.phoneNum = setPhoneNumber(phoneNum);
     }
 
-    //Chuẩn hóa tên
+    // Chuẩn hóa tên
     private String setName(String name) {
         String[] a = name.split("\\s+");
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
         for (String x : a) {
             sb.append(Character.toUpperCase(x.charAt(0)));
             sb.append(x.substring(1).toLowerCase());
@@ -34,7 +33,7 @@ public class Person {
         return sb.toString().trim();
     }
 
-    //Chuẩn hóa ngày sinh
+    // Chuẩn hóa ngày sinh
     private String setDob(String dob) {
         dob = dob.trim();
         String[] formats = {
@@ -54,10 +53,11 @@ public class Person {
         }
         return dob;
     }
-    //Chuẩn hóa số điện thoại
-    private String setPhoneNumber(String phone){
-        if (phone.charAt(0)!='0'){
-            return "0"+phone;
+
+    // Chuẩn hóa số điện thoại
+    private String setPhoneNumber(String phone) {
+        if (phone.charAt(0) != '0') {
+            return "0" + phone;
         }
         return phone;
     }
@@ -77,6 +77,9 @@ public class Person {
     public String getPhoneNum() {
         return phoneNum;
     }
+
+    // Phương thức trừu tượng
+    public abstract String save();
 
     @Override
     public String toString() {

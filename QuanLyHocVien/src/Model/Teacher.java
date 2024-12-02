@@ -1,16 +1,16 @@
 package Model;
 
-import java.util.*;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
-public class Teacher extends Person {
+class Teacher extends Person {
 
     private static int cnt = 0;
-    private TreeSet<String> teachingCourses = new TreeSet<>(); // ID các lớp học phần đang dạy
+    private TreeSet<String> teachingCourses = new TreeSet<>();
     private String email;
-    private static TreeMap<String, Teacher> allTeachers = new TreeMap<>(); // Lưu trữ tất cả các giáo viên
+    private static TreeMap<String, Teacher> allTeachers = new TreeMap<>();
 
     public Teacher() {
-
     }
 
     public Teacher(String name, String dob, String phoneNum) {
@@ -23,7 +23,6 @@ public class Teacher extends Person {
         return allTeachers;
     }
 
-    // Thêm giáo viên vào danh sách nếu chưa tồn tại
     public void addTeacherToList() {
         if (!allTeachers.containsKey(super.getId())) {
             allTeachers.put(super.getId(), this);
@@ -34,9 +33,8 @@ public class Teacher extends Person {
         this.teachingCourses.add(classID);
     }
 
-    //Tạo tài khoản email
     private String generateEmail() {
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
         String[] a = super.getName().split("\\s+");
         sb.append(a[a.length - 1]);
         for (int i = 0; i < a.length - 1; i++) {
@@ -55,9 +53,10 @@ public class Teacher extends Person {
         return teachingCourses;
     }
 
-    //Dùng để lưu vào file
+    @Override
     public String save() {
-        return super.getName() + "\n" + super.getDob() + "\n" + super.getPhoneNum();
+        // Lưu thông tin giáo viên vào file
+        return super.getId() + "," + super.getName() + "," + super.getDob() + "," + super.getPhoneNum() + "," + email;
     }
 
     @Override
