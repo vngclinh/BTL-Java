@@ -9,7 +9,7 @@ public class Score {
     private String result;
 
     public Score() {
-        this.attendance = 0;
+        this.attendance = 0.0;
         this.homework = 0.0;
         this.midTerm = 0.0;
         this.endTerm = 0.0;

@@ -79,7 +79,10 @@ public class Student extends Person implements Comparable<Student> {
 
     @Override
     public String toString() {
-        return super.toString();
+        String classIds = this.getClassAttended().keySet().isEmpty() ? "Chua cap nhat"
+                : this.getClassAttended().keySet().toString().replaceAll("[\\[\\]]", "");
+        return super.toString() + 
+                "\nClass: "+classIds;
     }
 
     @Override

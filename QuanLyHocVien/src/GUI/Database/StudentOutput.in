@@ -2,89 +2,107 @@ ID: ST001
 Name: Trịnh Diệu Linh
 Dob: 24/07/2004
 Phone number: 0123456789
+Class: ENG001-1
 
 ID: ST002
 Name: Hoang Minh Tuan
 Dob: 12/09/2002
 Phone number: 0987123456
+Class: ENG001-1, ENG306-1
 
 ID: ST003
 Name: Le Thi Hoa
 Dob: 08/03/2001
 Phone number: 0988234567
+Class: ENG001-1, ENG001-3
 
 ID: ST004
 Name: Nguyen Van Nam
 Dob: 22/11/2000
 Phone number: 0989345678
+Class: Hien khong co lop
 
 ID: ST005
 Name: Tran Van Kien
 Dob: 15/05/2003
 Phone number: 0989456789
+Class: ENG301-1
 
 ID: ST006
 Name: Pham Thi Lan
 Dob: 30/06/2002
 Phone number: 0989567890
+Class: Hien khong co lop
 
 ID: ST007
 Name: Nguyễn Minh Khoa
 Dob: 15/02/2005
 Phone number: 0912456789
+Class: Hien khong co lop
 
 ID: ST008
 Name: Trần Thanh Huyền
 Dob: 28/09/2006
 Phone number: 0983654321
+Class: Hien khong co lop
 
 ID: ST009
 Name: Lê Hoàng Nam
 Dob: 03/07/2004
 Phone number: 0905129876
+Class: ENG306-1
 
 ID: ST010
 Name: Phạm Gia Hân
 Dob: 21/11/2005
 Phone number: 0932756812
+Class: Hien khong co lop
 
 ID: ST011
 Name: Hoàng Nhật Quang
 Dob: 09/05/2004
 Phone number: 0978456723
+Class: ENG301-1
 
 ID: ST012
 Name: Đỗ Bảo Ngọc
 Dob: 12/04/2006
 Phone number: 0918654321
+Class: ENG001-1
 
 ID: ST013
 Name: Vũ Tuấn Anh
 Dob: 06/01/2005
 Phone number: 0981245678
+Class: Hien khong co lop
 
 ID: ST014
 Name: Nguyễn Thị Mai Phương
 Dob: 18/11/2003
 Phone number: 0909345678
+Class: Hien khong co lop
 
 ID: ST015
 Name: Trần Quang Huy
 Dob: 22/08/2002
 Phone number: 0978456123
+Class: Hien khong co lop
 
 ID: ST016
 Name: Lê Thị Thu Hà
 Dob: 05/05/2001
 Phone number: 0918567345
+Class: Hien khong co lop
 
 ID: ST017
 Name: Phạm Xuân Hòa
 Dob: 30/07/2004
 Phone number: 0906789456
+Class: Hien khong co lop
 
 ID: ST018
 Name: Đặng Bảo Khánh
 Dob: 12/03/2005
 Phone number: 0937456123
+Class: Hien khong co lop
 
