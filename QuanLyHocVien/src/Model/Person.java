@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-abstract class Person {
+public abstract class Person {
 
     private String id;
     private String name;

@@ -3,7 +3,7 @@ package Model;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-class Teacher extends Person {
+public class Teacher extends Person {
 
     private static int cnt = 0;
     private TreeSet<String> teachingCourses = new TreeSet<>();

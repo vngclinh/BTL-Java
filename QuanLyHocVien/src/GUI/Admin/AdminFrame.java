@@ -57,10 +57,10 @@ public class AdminFrame extends javax.swing.JFrame {
                     QLLH.setData();
                     setForm(QLLH);
                 } else if (index == 10) {
+                    setForm(DK);
+                } else if (index == 12) {
                     QLD.setData();
                     setForm(QLD);
-                } else if (index == 12) {
-                    setForm(DK);
                 }
             }
         });
