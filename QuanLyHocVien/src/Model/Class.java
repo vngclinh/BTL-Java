@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Class implements Comparable<Class> {
+public final class Class implements Comparable<Class> {
 
     private static final int MAX_STUDENTS = 20; // Giới hạn số lượng sinh viên 1 lớp học
     private static TreeMap<String, Class> allClasses = new TreeMap<>(); // Lưu trữ tất cả các lớp học

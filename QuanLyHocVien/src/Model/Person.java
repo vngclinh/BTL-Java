@@ -78,11 +78,10 @@ public abstract class Person {
         return phoneNum;
     }
 
-    // Phương thức trừu tượng
-    public abstract String save();
-
     @Override
-    public String toString() {
-        return "ID: " + id + "\nName: " + name + "\nDob: " + dob + "\nPhone number: " + phoneNum;
+    public String toString(){
+        return this.getName() + "\n" + this.getDob() + "\n" + this.getPhoneNum();
     }
+
+    public abstract String save();
 }

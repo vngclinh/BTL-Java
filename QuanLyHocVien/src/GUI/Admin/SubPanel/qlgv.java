@@ -305,7 +305,7 @@ public class qlgv extends javax.swing.JPanel {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath1))) {
             for (Teacher teacher : Teacher.getAllTeachers().values()) {
-                writer.write(teacher.save());
+                writer.write(teacher.toString());
                 writer.newLine(); // Xuống dòng sau mỗi giáo viên
             }
         } catch (IOException e) {
@@ -313,7 +313,7 @@ public class qlgv extends javax.swing.JPanel {
 
         try (BufferedWriter writer2 = new BufferedWriter(new FileWriter(filePath2))) {
             for (Teacher teacher : Teacher.getAllTeachers().values()) {
-                writer2.write(teacher.toString());
+                writer2.write(teacher.save());
                 writer2.newLine(); // Xuống dòng sau mỗi giáo viên
                 writer2.newLine();
             }

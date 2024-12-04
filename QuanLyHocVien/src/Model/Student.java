@@ -4,16 +4,19 @@ import java.util.*;
 
 public class Student extends Person implements Comparable<Student> {
 
-    private static int cnt = 0; // Đếm số lượng học viên
-    private Map<String, Score> classAttended = new TreeMap<>(); // Map<ClassID, Score>
+    private static int cnt = 0;
+    // Đếm số lượng học viên
+    private Map<String, Score> classAttended;     // Map<ClassID, Score>
     private static TreeMap<String, Student> allStudents = new TreeMap<>();
 
     public Student() {
+        this.classAttended = new TreeMap<>();
 
     }
 
     public Student(String name, String dob, String phoneNum) {
         super("ST" + String.format("%03d", ++cnt), name, dob, phoneNum);
+        this.classAttended = new TreeMap<>();
         addStudent();
     }
 
@@ -72,16 +75,14 @@ public class Student extends Person implements Comparable<Student> {
         return hasGradedClasses ? res.toString() : "";
     }
 
-    //Dùng để lưu vào file
-    public String save() {
-        return super.getName() + "\n" + super.getDob() + "\n" + super.getPhoneNum();
-    }
-
     @Override
-    public String toString() {
+    public String save() {
         String classIds = this.getClassAttended().keySet().isEmpty() ? "Chua cap nhat"
                 : this.getClassAttended().keySet().toString().replaceAll("[\\[\\]]", "");
-        return super.toString() + 
+        return "ID: " + super.getId() + 
+                "\nName: " + super.getName() + 
+                "\nDob: " + super.getDob() + 
+                "\nPhone number: " + super.getPhoneNum() + 
                 "\nClass: "+classIds;
     }
 

@@ -6,15 +6,17 @@ import java.util.TreeSet;
 public class Teacher extends Person {
 
     private static int cnt = 0;
-    private TreeSet<String> teachingCourses = new TreeSet<>();
+    private TreeSet<String> teachingCourses;
     private String email;
     private static TreeMap<String, Teacher> allTeachers = new TreeMap<>();
 
     public Teacher() {
+        this.teachingCourses = new TreeSet<>();
     }
 
     public Teacher(String name, String dob, String phoneNum) {
         super("TC" + String.format("%03d", ++cnt), name, dob, phoneNum);
+        this.teachingCourses = new TreeSet<>();
         this.email = generateEmail();
         addTeacherToList();
     }
@@ -46,25 +48,23 @@ public class Teacher extends Person {
     }
 
     public void assignCourse(String courseId) {
-        teachingCourses.add(courseId);
+        if(!this.teachingCourses.contains(courseId))
+            teachingCourses.add(courseId);
     }
 
     public TreeSet<String> getTeachingCourses() {
         return teachingCourses;
     }
-
+    
     @Override
     public String save() {
-        // Lưu thông tin giáo viên vào file
-        return super.getId() + "," + super.getName() + "," + super.getDob() + "," + super.getPhoneNum() + "," + email;
-    }
-
-    @Override
-    public String toString() {
         String classIds = this.getTeachingCourses().isEmpty() ? "Hien khong co lop"
                 : this.getTeachingCourses().toString().replaceAll("[\\[\\]]", "");
-        return super.toString()
-                + "\nEmail: " + email
-                + "\nTeaching Courses: " + classIds;
+        return "ID: " + super.getId() + 
+                "\nName: " + super.getName() + 
+                "\nDob: " + super.getDob() + 
+                "\nPhone number: " + super.getPhoneNum() + 
+                "\nEmail: " + email +
+                "\nTeaching Courses: " + classIds;
     }
 }

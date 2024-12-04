@@ -297,7 +297,7 @@ public class qlsv extends javax.swing.JPanel {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath1))) {
             for (Student x : Student.getAllStudents().values()) {
-                writer.write(x.save());
+                writer.write(x.toString());
                 writer.newLine(); // Xuống dòng 
             }
         } catch (IOException e) {
@@ -305,7 +305,7 @@ public class qlsv extends javax.swing.JPanel {
 
         try (BufferedWriter writer2 = new BufferedWriter(new FileWriter(filePath2))) {
             for (Student x : Student.getAllStudents().values()) {
-                writer2.write(x.toString());
+                writer2.write(x.save());
                 writer2.newLine(); // Xuống dòng 
                 writer2.newLine();
             }
